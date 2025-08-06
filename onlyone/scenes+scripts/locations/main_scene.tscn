@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b42qx2cd6q2t0"]
+
+[ext_resource type="Script" uid="uid://dyoad3jqiif4g" path="res://scenes+scripts/locations/main_scene.gd" id="1_l53hg"]
+[ext_resource type="AudioStream" uid="uid://dtxyfgdju8j2m" path="res://audio/maxkomusic-heroism(chosic.com).mp3" id="3_3hapf"]
+[ext_resource type="PackedScene" uid="uid://cswgwc1tiguxn" path="res://scenes+scripts/misc/main_screen.tscn" id="3_l53hg"]
+
+[node name="mainScene" type="Node2D" node_paths=PackedStringArray("music")]
+script = ExtResource("1_l53hg")
+music = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3hapf")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="mainScreen" parent="." instance=ExtResource("3_l53hg")]

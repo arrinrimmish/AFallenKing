@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://xc7hujvtieg7"]
+
+[ext_resource type="Script" uid="uid://dry6ghygo5gjs" path="res://scenes+scripts/enemies/attacks/slash.gd" id="1_lok1r"]
+
+[node name="slash" type="Node2D"]
+script = ExtResource("1_lok1r")
+
+[node name="mask" type="Polygon2D" parent="."]
+clip_children = 1
+scale = Vector2(2, 2)
+invert_enabled = true
+polygon = PackedVector2Array(-30, -39, 11, -23, 6, 21, 0, 20, -5, 22, -9, 27, -13, 33, -69, 16)
+
+[node name="slash" type="Polygon2D" parent="mask"]
+position = Vector2(1, 0)
+rotation = -0.383972
+color = Color(0.6, 0.6, 0.6, 0.470588)
+polygon = PackedVector2Array(-6, 19, -22.6034, 11.8991, -31.7582, 1.18981, -35.35, -7.27182, -35.233, -14.235, -31.9599, -21.0016, -25.3526, -25.3426, -19.1199, -28.7564, -13.6365, -30.3158, -8.25134, -30.2971, -1.47543, -29.7165, 7, -27, -6, -21, -15, -4, -15, 4, -13, 9)

@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmc5d2ike6o27"]
+
+[ext_resource type="Script" uid="uid://un20tbyw5l80" path="res://scenes+scripts/locations/end_game.gd" id="1_qpati"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q5ew2"]
+polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+
+[sub_resource type="Gradient" id="Gradient_ea5mf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qpati"]
+gradient = SubResource("Gradient_ea5mf")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_onuo3"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3u7cj"]
+gradient = SubResource("Gradient_onuo3")
+width = 20
+height = 20
+
+[node name="endGame" type="Node2D"]
+script = ExtResource("1_qpati")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.0976563, 0.0976563, 0.0976563, 1)
+polygon = PackedVector2Array(-532, -297, 1148, -321, 1112, 601, -627, 586)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="throne" type="Polygon2D" parent="."]
+position = Vector2(6370, 3667)
+rotation = 3.14159
+scale = Vector2(2, 2)
+color = Color(0.484375, 0.484375, 0.484375, 1)
+polygon = PackedVector2Array(3168, 1904, 3168, 1879, 3173, 1879, 3173, 1898, 3198, 1898, 3198, 1879, 3203, 1879, 3203, 1904)
+
+[node name="Polygon2D" type="Polygon2D" parent="throne"]
+color = Color(0.484375, 0.484375, 0.484375, 1)
+polygon = PackedVector2Array(3173, 1879, 3173, 1898, 3198, 1898, 3198, 1879)
+
+[node name="Line2D" type="Line2D" parent="throne"]
+points = PackedVector2Array(3173, 1879, 3173, 1898)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D2" type="Line2D" parent="throne"]
+position = Vector2(25, 0)
+points = PackedVector2Array(3173, 1879, 3173, 1898)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D3" type="Line2D" parent="throne"]
+position = Vector2(0, 18)
+points = PackedVector2Array(3168, 1880, 3203, 1880)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="throne"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(3167, 1878, 3204, 1878, 3204, 1905, 3167, 1905)
+
+[node name="square" type="Polygon2D" parent="."]
+process_mode = 1
+light_mask = 2
+z_index = 1
+position = Vector2(0, -109)
+scale = Vector2(2, 2)
+color = Color(0.683333, 0, 1, 1)
+polygon = PackedVector2Array(9, 9, 8, 3, 6, 0, 8, -3, 9, -9, 3, -8, 0, -6, -3, -8, -9, -9, -8, -3, -6, 0, -8, 3, -9, 9, -3, 8, 0, 6, 3, 8)
+
+[node name="Polygon2D" type="Polygon2D" parent="square"]
+process_mode = 1
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="square"]
+occluder = SubResource("OccluderPolygon2D_q5ew2")
+
+[node name="PointLight2D" type="PointLight2D" parent="square"]
+color = Color(0.905791, 0.519531, 1, 1)
+energy = 0.75
+range_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_qpati")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="square"]
+light_mask = 2
+scale = Vector2(0.99, 0.99)
+texture = SubResource("GradientTexture2D_3u7cj")
+
+[node name="crown" type="Polygon2D" parent="square"]
+z_index = 1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(10, -4, 6, -7, 0, -6, -5, -7, -10, -4, -15, -13, -17, -17, -9, -9, -12, -16, -7, -10, -8, -15, -4, -12, -2, -13, 0, -24, 2, -13, 4, -12, 8, -15, 7, -10, 12, -16, 9, -9, 17, -17, 15, -13)
+
+[node name="jewel" type="Polygon2D" parent="square/crown"]
+color = Color(0.855469, 0, 0, 1)
+polygon = PackedVector2Array(0, -8, -1, -10, 0, -19, 1, -10)
+
+[node name="outline" type="Polygon2D" parent="square/crown"]
+show_behind_parent = true
+color = Color(0.263542, 0, 0.359375, 1)
+polygon = PackedVector2Array(-10, -3, -20, -20, -11, -12, -14, -19, -8, -12, -9, -17, -4, -13, -3, -14, 0, -25, 3, -14, 4, -13, 9, -17, 8, -12, 13, -18, 11, -12, 20, -20, 10, -3, 6, -6, 0, -5, -5, -6)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -263.0
+offset_right = 10277.0
+offset_bottom = 21720.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/mono_font_size = 350
+theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
+text = "[center]all hail The king of the dead!
+credits:[/center]
+[code]Thank you for playing A Fallen King. I hope you enjoyed it![/code]
+[center]State Machine Code[/center]
+[code]A Youtuber named Bitlytic  https://www.youtube.com/watch?v=ow_Lum-Agbs&pp=0gcJCccJAYcqIYzv[/code][center]
+Art[/center][code]
+The art was all made with features that were built into Godot, which was something I wanted to try with this game jam, and I think I might have actually pulled it off![/code]
+[center]Music Credits[/center]
+[code]All of these are from a Site called Chosic. I would have tried to do my own music, but ran out of time.
+Dragon Slayer by Makai Symphony | https://soundcloud.com/makai-symphony
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/ 
+
+Ultra Lag by Alex-Productions | https://onsound.eu/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Heroism by MaxKoMusic | https://maxkomusic.com/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/deed.en_US [/code][center]
+ 
+[code]Thanks Again for playing! Sorry I didn't have time to do more!"

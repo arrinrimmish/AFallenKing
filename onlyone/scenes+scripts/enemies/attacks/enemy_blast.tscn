@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://br2rshj81f63i"]
+
+[ext_resource type="Script" uid="uid://c75sq436cyyn" path="res://scenes+scripts/enemies/attacks/enemy_blast.gd" id="1_crq8h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36rqx"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_50p6q"]
+radius = 9.09092
+
+[sub_resource type="Curve" id="Curve_kl6dk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.170455, 1), 0.0, 0.0, 0, 0, Vector2(0.568182, 0.820225), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_rnpan"]
+colors = PackedColorArray(0.894531, 0.0174713, 0.0174713, 1, 0.686275, 0, 0, 1)
+
+[node name="enemyBlast" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_crq8h")
+speed = 1200.0
+maxSpeed = 250.0
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("CircleShape2D_36rqx")
+
+[node name="triangle" type="Polygon2D" parent="."]
+position = Vector2(0, 5.96046e-08)
+rotation = 1.5708
+scale = Vector2(3.5, 3.5)
+color = Color(0.69, 0, 0, 1)
+polygon = PackedVector2Array(0, -2.5, 1, 0, -1, 0)
+
+[node name="triangle" type="Polygon2D" parent="triangle"]
+show_behind_parent = true
+position = Vector2(0, 0.35)
+scale = Vector2(1.4, 1.4)
+polygon = PackedVector2Array(0, -2.5, 1, 0, -1, 0)
+
+[node name="Area2D" type="Area2D" parent="triangle"]
+position = Vector2(-1.70299e-08, 6.1648e-14)
+rotation = -1.5708
+scale = Vector2(0.285714, 0.285714)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="triangle/Area2D"]
+position = Vector2(3, 0)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("CircleShape2D_50p6q")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 0.2
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.25
+orbit_velocity_max = 0.35
+radial_accel_max = 45.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 3.5
+scale_amount_curve = SubResource("Curve_kl6dk")
+color_initial_ramp = SubResource("Gradient_rnpan")
+
+[connection signal="body_entered" from="triangle/Area2D" to="." method="_on_area_2d_body_entered"]

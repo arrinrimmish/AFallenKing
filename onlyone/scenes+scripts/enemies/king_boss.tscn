@@ -1,0 +1,609 @@
+[gd_scene load_steps=27 format=3 uid="uid://mwbfhwclysw1"]
+
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_epof1"]
+[ext_resource type="Script" uid="uid://bq86gphf7reks" path="res://scenes+scripts/enemies/king_boss.gd" id="1_gclhh"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="2_r2yd7"]
+[ext_resource type="Script" uid="uid://bs1fpi6rmevxb" path="res://components/knock_back_component.gd" id="3_lan3i"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="4_wqrmx"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="5_gclhh"]
+[ext_resource type="Script" uid="uid://dxifmt5nfxr67" path="res://states/king_manage_state.gd" id="6_r2yd7"]
+[ext_resource type="Script" uid="uid://bvngisa5v80pb" path="res://states/enter_state.gd" id="7_wqrmx"]
+[ext_resource type="Script" uid="uid://d2b0yk3iyik3a" path="res://states/king_rage_state.gd" id="8_gclhh"]
+[ext_resource type="Script" uid="uid://b5o8lhkrcfxyv" path="res://states/king_spirit_state.gd" id="10_ga63d"]
+[ext_resource type="Script" uid="uid://dwc5cigoae484" path="res://states/enemy_move_state.gd" id="11_bewx4"]
+[ext_resource type="Script" uid="uid://bbegig5syeja4" path="res://states/king_slash_state.gd" id="12_vsft7"]
+[ext_resource type="Script" uid="uid://d2gjdgfeohq0y" path="res://states/king_move_state.gd" id="13_3fhs5"]
+[ext_resource type="Script" uid="uid://dxi0ool53mere" path="res://scenes+scripts/enemies/attacks/sword.gd" id="13_o7ocs"]
+[ext_resource type="Script" uid="uid://c0i2id2nsjsye" path="res://states/king_rapid_fire_state.gd" id="14_3fhs5"]
+[ext_resource type="Script" uid="uid://dl0toycn5toco" path="res://states/king_dragon_state.gd" id="15_7k5d0"]
+[ext_resource type="Script" uid="uid://tylddsnl7fyi" path="res://states/moveState.gd" id="16_6o7wp"]
+[ext_resource type="AudioStream" uid="uid://c5ulmec25b486" path="res://audio/Ultra-Lag-chosic.com_.mp3" id="18_pneh6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ga63d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bewx4"]
+radius = 690.036
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cpgk2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqrmx"]
+radius = 405.0
+
+[sub_resource type="Curve" id="Curve_ga63d"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.454545, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_bewx4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0625, 1), 0.0, 0.0, 0, 0, Vector2(0.613636, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_6o7wp"]
+_limits = [-20.0, 38.2023, 0.0, 1.0]
+_data = [Vector2(0, 19.8914), 0.0, 0.0, 0, 0, Vector2(1, -20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6o7wp"]
+radius = 12.8062
+
+[node name="kingBoss" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine", "moveState", "spiritState", "particles", "deathTimer", "character", "music") groups=["enemy", "king"]]
+process_mode = 3
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_gclhh")
+stateMachine = NodePath("StateMachine")
+moveState = NodePath("StateMachine/deathMoveState")
+spiritState = NodePath("StateMachine/spiritState")
+particles = NodePath("powerParticles")
+deathTimer = NodePath("deathTimer")
+character = NodePath("texture/square")
+music = NodePath("AudioStreamPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 1
+shape = SubResource("CircleShape2D_ga63d")
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="." node_paths=PackedStringArray("holder", "healthComponent", "knockbackComponent")]
+process_mode = 1
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_epof1")
+holder = NodePath("..")
+healthComponent = NodePath("../HealthComponent")
+knockbackComponent = NodePath("../KnockBackComponent")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_ga63d")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+process_mode = 1
+script = ExtResource("2_r2yd7")
+holder = NodePath("..")
+maxHealth = 20.0
+notifyHolder = true
+metadata/_custom_type_script = "uid://drmqdd5v2r0ab"
+
+[node name="KnockBackComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+process_mode = 1
+script = ExtResource("3_lan3i")
+holder = NodePath("..")
+resistance = 1.0
+metadata/_custom_type_script = "uid://bs1fpi6rmevxb"
+
+[node name="SightComponent" type="Area2D" parent="."]
+process_mode = 1
+script = ExtResource("4_wqrmx")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightComponent"]
+shape = SubResource("CircleShape2D_bewx4")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="closeSightComp" type="Area2D" parent="."]
+process_mode = 1
+visible = false
+script = ExtResource("4_wqrmx")
+targetGroup = "enemy"
+canLeave = true
+storeAll = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closeSightComp"]
+shape = SubResource("CircleShape2D_cpgk2")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="startFightSight" type="Area2D" parent="."]
+process_mode = 1
+script = ExtResource("4_wqrmx")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="startFightSight"]
+shape = SubResource("CircleShape2D_wqrmx")
+debug_color = Color(0.128, 0.64, 0, 0)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+process_mode = 1
+script = ExtResource("5_gclhh")
+baseState = NodePath("EnterState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="kingManageState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "healthComp", "moveState", "fastMoveState", "spiritState", "rapidFireState", "rapidFireParticles", "dragonState", "dragonMoveState", "stateMachine")]
+script = ExtResource("6_r2yd7")
+holder = NodePath("../..")
+healthComp = NodePath("../../HealthComponent")
+moveState = NodePath("../kingMoveState")
+fastMoveState = NodePath("../fastMoveState")
+spiritState = NodePath("../spiritState")
+rapidFireState = NodePath("../rapidFireState")
+rapidFireParticles = NodePath("../../powerParticles")
+dragonState = NodePath("../dragonState")
+dragonMoveState = NodePath("../EnemyMoveState")
+stateMachine = NodePath("..")
+
+[node name="EnterState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sight", "nextState")]
+script = ExtResource("7_wqrmx")
+sight = NodePath("../../startFightSight")
+nextState = NodePath("../rageState")
+metadata/_custom_type_script = "uid://bvngisa5v80pb"
+
+[node name="rageState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "healthComp", "character", "particles", "stateMachine", "timer", "moveTimer", "nextState", "burstParticles", "burstCollision", "music")]
+script = ExtResource("8_gclhh")
+holder = NodePath("../..")
+healthComp = NodePath("../../HealthComponent")
+character = NodePath("../../texture/square")
+particles = NodePath("../../powerParticles")
+stateMachine = NodePath("..")
+timer = NodePath("../../rageTimer")
+moveTimer = NodePath("../../cutsceneTimer")
+nextState = NodePath("../kingManageState")
+burstParticles = NodePath("../../cutsceneParticles")
+burstCollision = NodePath("../../cutsceneBurst/CollisionShape2D")
+music = NodePath("../../AudioStreamPlayer")
+
+[node name="spiritState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "teleport", "point", "texture", "particles", "nextState", "spirit", "hitBoxhComp", "collision")]
+script = ExtResource("10_ga63d")
+holder = NodePath("../..")
+speed = 25000.0
+sight = NodePath("../../SightComponent")
+teleport = NodePath("../../breakPoint/teleport")
+point = NodePath("../../breakPoint/teleport/point")
+texture = NodePath("../../texture")
+particles = NodePath("../../teleportParticles")
+nextState = NodePath("../kingManageState")
+spirit = NodePath("../../spirit/spirit")
+lengths = PackedInt32Array(1, 5, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2)
+hitBoxhComp = NodePath("../../HitBoxComponent")
+collision = NodePath("../../CollisionShape2D")
+
+[node name="slashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "nextState", "sword", "character", "shots")]
+script = ExtResource("12_vsft7")
+holder = NodePath("../..")
+sight = NodePath("../../SightComponent")
+nextState = NodePath("../kingManageState")
+sword = NodePath("../../texture/swords")
+character = NodePath("../../texture/square")
+delay = 0.8
+slashPath = "res://scenes+scripts/enemies/attacks/bigSlash.tscn"
+shots = NodePath("../../shots")
+
+[node name="rapidSlashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "nextState", "sword", "character", "shots")]
+script = ExtResource("12_vsft7")
+holder = NodePath("../..")
+sight = NodePath("../../SightComponent")
+nextState = NodePath("../kingManageState")
+sword = NodePath("../../texture/swords")
+character = NodePath("../../texture/square")
+delay = 0.2
+slashPath = "res://scenes+scripts/enemies/attacks/bigSlash.tscn"
+shots = NodePath("../../shots")
+followSpeed = 300
+
+[node name="kingMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("13_3fhs5")
+farAttackRange = 250.0
+see = NodePath("../../SightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 50.0
+attackRange = 80.0
+stopRange = 80.0
+tool = NodePath("../../texture/swords")
+holder = NodePath("../..")
+speed = 1100.0
+drag = 750.0
+maxSpeed = 130.0
+character = NodePath("../../texture/square")
+attack1 = NodePath("../slashState")
+
+[node name="fastMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("13_3fhs5")
+farAttackRange = 200.0
+see = NodePath("../../SightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 50.0
+attackRange = 80.0
+stopRange = 80.0
+tool = NodePath("../../texture/swords")
+holder = NodePath("../..")
+speed = 1100.0
+drag = 750.0
+maxSpeed = 160.0
+character = NodePath("../../texture/square")
+attack1 = NodePath("../slashState")
+
+[node name="rapidFireState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "teleport", "point", "collision", "hitBoxComp", "spirit", "texture", "particles", "nextState", "manageState")]
+script = ExtResource("14_3fhs5")
+holder = NodePath("../..")
+teleport = NodePath("../../breakPoint/teleport")
+point = NodePath("../../breakPoint/teleport/point")
+collision = NodePath("../../CollisionShape2D")
+hitBoxComp = NodePath("../../HitBoxComponent")
+spirit = NodePath("../../spirit/spirit")
+texture = NodePath("../../texture")
+particles = NodePath("../../powerParticles")
+lengths = PackedInt32Array(1, 5, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2)
+nextState = NodePath("../rapidSlashState")
+speed = 25000.0
+manageState = NodePath("../kingManageState")
+
+[node name="dragonState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "character", "particles", "spawnParticles1", "spawnParticles2", "spawnTimer", "summons", "manageState")]
+script = ExtResource("15_7k5d0")
+holder = NodePath("../..")
+character = NodePath("../../texture/square")
+particles = NodePath("../../powerParticles")
+dragonSize = 15
+spawnParticles1 = NodePath("../../breakPoint/dragonSummons/1/summonParticles")
+spawnParticles2 = NodePath("../../breakPoint/dragonSummons/2/summonParticles2")
+spawnTimer = NodePath("../../summonTimer")
+summons = NodePath("../../breakPoint/dragonSummons")
+manageState = NodePath("../kingManageState")
+
+[node name="EnemyMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("11_bewx4")
+see = NodePath("../../SightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 50.0
+attackRange = 85.0
+stopRange = 85.0
+tool = NodePath("../../texture/swords")
+holder = NodePath("../..")
+speed = 1100.0
+drag = 750.0
+maxSpeed = 80.0
+character = NodePath("../../texture/square")
+attack1 = NodePath("../draonSlashState")
+metadata/_custom_type_script = "uid://dwc5cigoae484"
+
+[node name="draonSlashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "nextState", "sword", "character", "shots")]
+script = ExtResource("12_vsft7")
+holder = NodePath("../..")
+sight = NodePath("../../SightComponent")
+nextState = NodePath("../kingManageState")
+sword = NodePath("../../texture/swords")
+character = NodePath("../../texture/square")
+delay = 0.9
+slashPath = "res://scenes+scripts/enemies/attacks/bigSlash.tscn"
+shots = NodePath("../../shots")
+shoot = false
+metadata/_custom_type_script = "uid://bbegig5syeja4"
+
+[node name="deathMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "character", "attack1")]
+script = ExtResource("16_6o7wp")
+holder = NodePath("../..")
+character = NodePath("../../texture/square")
+attack1 = NodePath("../slashState")
+metadata/_custom_type_script = "uid://tylddsnl7fyi"
+
+[node name="texture" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="crown" type="Polygon2D" parent="texture"]
+z_index = 1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(10, -4, 6, -7, 0, -6, -5, -7, -10, -4, -15, -13, -17, -17, -9, -9, -12, -16, -7, -10, -8, -15, -4, -12, -2, -13, 0, -24, 2, -13, 4, -12, 8, -15, 7, -10, 12, -16, 9, -9, 17, -17, 15, -13)
+
+[node name="jewel" type="Polygon2D" parent="texture/crown"]
+color = Color(0.855469, 0, 0, 1)
+polygon = PackedVector2Array(0, -8, -1, -10, 0, -19, 1, -10)
+
+[node name="outline" type="Polygon2D" parent="texture/crown"]
+show_behind_parent = true
+color = Color(0.489844, 0, 0.667969, 1)
+polygon = PackedVector2Array(-10, -3, -20, -20, -11, -12, -14, -19, -8, -12, -9, -17, -4, -13, -3, -14, 0, -25, 3, -14, 4, -13, 9, -17, 8, -12, 13, -18, 11, -12, 20, -20, 10, -3, 6, -6, 0, -5, -5, -6)
+
+[node name="square" type="Polygon2D" parent="texture"]
+process_mode = 1
+color = Color(0.992188, 0, 1, 1)
+polygon = PackedVector2Array(7, 7, 9, 8, 8, 3, 5, 2, 6, 0, 5, -2, 8, -3, 9, -8, 7, -7, 8, -9, 3, -8, 2, -5, 0, -6, -2, -5, -3, -8, -8, -9, -7, -7, -9, -8, -8, -3, -5, -2, -6, 0, -5, 2, -8, 3, -9, 8, -7, 7, -8, 9, -3, 8, -2, 5, 0, 6, 0, 5, -1, 2, 0, 0, -2, 1, -5, 0, -2, -1, 0, 0, -1, -2, 0, -5, 1, -2, 0, 0, 2, -1, 5, 0, 2, 1, 0, 0, 1, 2, 0, 5, 0, 6, 2, 5, 3, 8, 8, 9)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="texture/square"]
+process_mode = 1
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="swords" type="Area2D" parent="texture"]
+rotation = 4.71239
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("13_o7ocs")
+
+[node name="sword1" type="CollisionPolygon2D" parent="texture/swords"]
+rotation = -1.74533
+polygon = PackedVector2Array(16, -4, 76, 0, 22, 2)
+
+[node name="shadowSword" type="Polygon2D" parent="texture/swords/sword1"]
+color = Color(1, 0, 1, 0.588235)
+polygon = PackedVector2Array(16, -4, 76, 0, 22, 2)
+
+[node name="outline" type="Polygon2D" parent="texture/swords/sword1"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(14, -5, 28, -1, 22, 3)
+
+[node name="sword" type="Polygon2D" parent="texture/swords/sword1"]
+polygon = PackedVector2Array(16, -4, 26, -1, 22, 2)
+
+[node name="sword2" type="CollisionPolygon2D" parent="texture/swords"]
+rotation = -1.39626
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(16, -4, 76, 0, 22, 2)
+
+[node name="shadowSword" type="Polygon2D" parent="texture/swords/sword2"]
+color = Color(1, 0, 1, 0.588235)
+polygon = PackedVector2Array(16, -4, 76, 0, 22, 2)
+
+[node name="outline" type="Polygon2D" parent="texture/swords/sword2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(14, -5, 28, -1, 22, 3)
+
+[node name="sword" type="Polygon2D" parent="texture/swords/sword2"]
+polygon = PackedVector2Array(16, -4, 26, -1, 22, 2)
+
+[node name="rageTimer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
+
+[node name="spirit" type="Node" parent="."]
+process_mode = 1
+
+[node name="spirit" type="Node2D" parent="spirit"]
+visible = false
+
+[node name="head" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(42, 1)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+
+[node name="seg1" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-25, -12)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-3, 0, 0, -4, 3, 0, 0, 4)
+
+[node name="seg2" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-35, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg9" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-35, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg10" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-35, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg3" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-53, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg6" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-56, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg7" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-56, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg8" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-56, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg4" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-63, -13)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -1, 1, 0, 0, 1)
+
+[node name="seg5" type="Polygon2D" parent="spirit/spirit"]
+position = Vector2(-80, -14)
+color = Color(0.992157, 0, 1, 1)
+polygon = PackedVector2Array(-4, 0, 0, -1, 1, 0, 0, 1)
+
+[node name="breakPoint" type="Node" parent="."]
+
+[node name="teleport" type="Node2D" parent="breakPoint"]
+
+[node name="point" type="Marker2D" parent="breakPoint/teleport"]
+position = Vector2(275, 0)
+
+[node name="dragonSummons" type="Node2D" parent="breakPoint"]
+
+[node name="1" type="Marker2D" parent="breakPoint/dragonSummons"]
+position = Vector2(100, -50)
+
+[node name="summonParticles" type="CPUParticles2D" parent="breakPoint/dragonSummons/1"]
+process_mode = 1
+position = Vector2(-100, -50)
+emitting = false
+amount = 150
+lifetime = 0.4
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_ga63d")
+scale_amount_min = 4.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_bewx4")
+color = Color(1, 0.35, 1, 0.796078)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="2" type="Marker2D" parent="breakPoint/dragonSummons"]
+position = Vector2(-100, -50)
+
+[node name="summonParticles2" type="CPUParticles2D" parent="breakPoint/dragonSummons/2"]
+process_mode = 1
+position = Vector2(100, -50)
+emitting = false
+amount = 150
+lifetime = 0.4
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_ga63d")
+scale_amount_min = 4.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_bewx4")
+color = Color(1, 0.35, 1, 0.796078)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="teleportParticles" type="CPUParticles2D" parent="."]
+process_mode = 1
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.99
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_ga63d")
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_bewx4")
+color = Color(0.994914, 0.351563, 1, 1)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="powerParticles" type="CPUParticles2D" parent="."]
+process_mode = 1
+emitting = false
+amount = 150
+lifetime = 0.8
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_ga63d")
+scale_amount_min = 4.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_bewx4")
+color = Color(1, 0.35, 1, 0.796078)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="cutsceneParticles" type="CPUParticles2D" parent="."]
+process_mode = 1
+emitting = false
+amount = 150
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 550.0
+initial_velocity_max = 650.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+linear_accel_min = 10.0
+linear_accel_max = 20.0
+linear_accel_curve = SubResource("Curve_6o7wp")
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_ga63d")
+scale_amount_min = 4.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_bewx4")
+color = Color(1, 0.35, 1, 0.796078)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="shots" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="1" type="Marker2D" parent="shots"]
+position = Vector2(0, 5)
+
+[node name="2" type="Marker2D" parent="shots"]
+position = Vector2(0, -5)
+
+[node name="summonTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="deathTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 3.0
+one_shot = true
+
+[node name="cutsceneTimer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
+
+[node name="cutsceneBurst" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cutsceneBurst"]
+shape = SubResource("CircleShape2D_6o7wp")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("18_pneh6")
+parameters/looping = true
+
+[connection signal="body_entered" from="texture/swords" to="texture/swords" method="_on_body_entered"]
+[connection signal="body_entered" from="cutsceneBurst" to="." method="_on_cutscene_burst_body_entered"]

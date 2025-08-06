@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cqpj0rorok5c0"]
+
+[node name="knifeSlash" type="Node2D"]
+
+[node name="mask" type="Polygon2D" parent="."]
+clip_children = 1
+invert_enabled = true
+polygon = PackedVector2Array(-30, -39, 11, -23, 6, 21, 0, 20, -5, 22, -9, 27, -13, 33, -69, 16)
+
+[node name="slash" type="Polygon2D" parent="mask"]
+position = Vector2(1, 0)
+rotation = -0.383972
+color = Color(0.6, 0.6, 0.6, 0.470588)
+polygon = PackedVector2Array(-6, 19, -18.2251, 7.73609, -20.0608, 1.60174, -20.9693, -4.15799, -22.2524, -8.99055, -19.2556, -16.408, -15.1536, -21.2219, -10.8736, -23.8068, -6.96821, -25.4646, -3.43745, -26.1951, 7, -27, -6, -21, -15, -4, -15, 4, -13, 9)

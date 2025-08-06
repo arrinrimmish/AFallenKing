@@ -1,0 +1,148 @@
+[gd_scene load_steps=12 format=3 uid="uid://da865llr1mn4t"]
+
+[ext_resource type="Script" uid="uid://u1p2n8y25bti" path="res://scenes+scripts/enemies/enemy.gd" id="1_63uy2"]
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_yhpl0"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="2_r8eej"]
+[ext_resource type="Script" uid="uid://bs1fpi6rmevxb" path="res://components/knock_back_component.gd" id="3_lv5du"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="4_kkouo"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="5_lv5du"]
+[ext_resource type="Script" uid="uid://c78babemtjbxe" path="res://states/shoot_state.gd" id="7_kkouo"]
+[ext_resource type="Script" uid="uid://b3uscgnm8pc7u" path="res://states/shoot_enemy_move_state.gd" id="8_63uy2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_63uy2"]
+radius = 10.0499
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcct4"]
+radius = 275.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv5du"]
+radius = 29.0
+
+[node name="shootEnemy" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+script = ExtResource("1_63uy2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_63uy2")
+
+[node name="square" type="Polygon2D" parent="."]
+z_index = 1
+color = Color(1, 0, 0.679688, 1)
+polygon = PackedVector2Array(6, -6, 6, -8, 1, -8, 1, -4, -1, -4, -1, -8, -6, -8, -6, -6, -8, -6, -8, -1, -4, -1, -4, 1, -8, 1, -8, 6, -6, 6, -6, 8, -1, 8, -1, 4, 1, 4, 1, 8, 6, 8, 6, 6, 8, 6, 8, 1, 4, 1, 4, -1, 8, -1, 8, -6)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="." node_paths=PackedStringArray("holder", "healthComponent", "knockbackComponent")]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_yhpl0")
+holder = NodePath("..")
+healthComponent = NodePath("../HealthComponent")
+knockbackComponent = NodePath("../KnockBackComponent")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_63uy2")
+
+[node name="KnockBackComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("3_lv5du")
+holder = NodePath("..")
+resistance = 1.0
+metadata/_custom_type_script = "uid://bs1fpi6rmevxb"
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("2_r8eej")
+holder = NodePath("..")
+maxHealth = 1.0
+metadata/_custom_type_script = "uid://drmqdd5v2r0ab"
+
+[node name="SightComponent" type="Area2D" parent="."]
+visible = false
+script = ExtResource("4_kkouo")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightComponent"]
+shape = SubResource("CircleShape2D_jcct4")
+debug_color = Color(0.252235, 0.61, 0.1891, 0)
+
+[node name="closeSightComp" type="Area2D" parent="."]
+visible = false
+script = ExtResource("4_kkouo")
+targetGroup = "enemy"
+canLeave = true
+storeAll = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closeSightComp"]
+shape = SubResource("CircleShape2D_lv5du")
+debug_color = Color(0.275, 0.55, 0.275, 0)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+script = ExtResource("5_lv5du")
+baseState = NodePath("shootEnemyMoveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="shootEnemyMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("orb1", "orb2", "see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("8_63uy2")
+orb1 = NodePath("../../staff/outline/staff/orbs/orb")
+orb2 = NodePath("../../staff/outline/staff/orbs/orb2")
+see = NodePath("../../SightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 50.0
+attackRange = 200.0
+stopRange = 200.0
+tool = NodePath("../../staff")
+holder = NodePath("../..")
+speed = 900.0
+drag = 750.0
+maxSpeed = 60.0
+character = NodePath("../../square")
+attack1 = NodePath("../shootState")
+runDirection = -1
+
+[node name="shootState" type="Node" parent="StateMachine" node_paths=PackedStringArray("staff", "orb1", "orb2", "orbs", "nextState", "character", "sight")]
+script = ExtResource("7_kkouo")
+staff = NodePath("../../staff")
+orb1 = NodePath("../../staff/outline/staff/orbs/orb")
+orb2 = NodePath("../../staff/outline/staff/orbs/orb2")
+orbs = NodePath("../../staff/outline/staff/orbs")
+nextState = NodePath("../shootEnemyMoveState")
+character = NodePath("../../square")
+sight = NodePath("../../SightComponent")
+
+[node name="staff" type="Node2D" parent="."]
+
+[node name="outline" type="Polygon2D" parent="staff"]
+rotation = 0.785398
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(13.8112, 1.80296, 17.7304, -3.2606, 23, -2, 24.9286, -2.45542, 29, -2, 35, -5, 31.7768, -0.485678, 35.6332, 2.69674, 33.4542, 2.19506, 27.8889, 0.45489)
+
+[node name="staff" type="Polygon2D" parent="staff/outline"]
+color = Color(0.695313, 0.598892, 0.309631, 1)
+polygon = PackedVector2Array(15, 1, 25, 0, 29, 0, 34, 2, 31, 0, 31, -1, 34, -4, 29, -1, 25, -2, 23, -1, 18, -2)
+
+[node name="orbs" type="Node2D" parent="staff/outline/staff"]
+position = Vector2(38, -1)
+
+[node name="orb" type="Polygon2D" parent="staff/outline/staff/orbs"]
+scale = Vector2(2.25, 2.25)
+color = Color(0.75, 0, 0, 0.47451)
+polygon = PackedVector2Array(0, -2, 0.444445, -0.444444, 2, 0, 0.444445, 0.444444, 0, 2, -0.444445, 0.444444, -2, 0, -0.444445, -0.444444)
+
+[node name="orb2" type="Polygon2D" parent="staff/outline/staff/orbs"]
+rotation = 0.785398
+scale = Vector2(2.25, 2.25)
+color = Color(0.75, 0, 0, 0.47451)
+polygon = PackedVector2Array(0, -2, 0.444445, -0.444444, 2, 0, 0.444445, 0.444444, 0, 2, -0.444445, 0.444444, -2, 0, -0.444445, -0.444444)
+
+[connection signal="body_entered" from="SightComponent" to="SightComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="SightComponent" to="SightComponent" method="_on_body_exited"]
+[connection signal="body_entered" from="closeSightComp" to="closeSightComp" method="_on_body_entered"]
+[connection signal="body_exited" from="closeSightComp" to="closeSightComp" method="_on_body_exited"]

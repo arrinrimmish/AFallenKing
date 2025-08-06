@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvdbqvk2lc4l6"]
+
+[ext_resource type="Script" uid="uid://cju1ofgmvvlsa" path="res://scenes+scripts/enemies/dragon.gd" id="1_6i7ua"]
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_70f4u"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="3_u1q25"]
+[ext_resource type="Script" uid="uid://b5jeu8y4qo2nm" path="res://dragon_move_state.gd" id="4_udjsd"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="5_6r3b8"]
+[ext_resource type="Script" uid="uid://dxi0ool53mere" path="res://scenes+scripts/enemies/attacks/sword.gd" id="6_klvqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i7ua"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6r3b8"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klvqp"]
+radius = 8.0
+
+[node name="dragon" type="CharacterBody2D" node_paths=PackedStringArray("hitBox", "moveState")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_6i7ua")
+hitBox = NodePath("HitBoxComponent")
+moveState = NodePath("StateMachine/dragonMoveState")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6i7ua")
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_70f4u")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_6i7ua")
+
+[node name="square" type="Polygon2D" parent="."]
+color = Color(0.492188, 0.492188, 0.492188, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, 0, 9, -4, 8, -8, 4, -9, 0, -9, -4, -9, -8, -8, -9, -4, -9, 0, -9, 4, -8, 8, -4, 9, 0, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+script = ExtResource("3_u1q25")
+baseState = NodePath("dragonMoveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="dragonMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sight", "holder", "character")]
+script = ExtResource("4_udjsd")
+sight = NodePath("../../closeSightComp")
+holder = NodePath("../..")
+speed = 1000.0
+drag = 2000.0
+maxSpeed = 300.0
+character = NodePath("../../square")
+
+[node name="closeSightComp" type="Area2D" parent="." groups=["dragon"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_6r3b8")
+targetGroup = "dragon"
+pickClosest = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closeSightComp"]
+shape = SubResource("CircleShape2D_6r3b8")
+
+[node name="attack" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("6_klvqp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+shape = SubResource("CircleShape2D_klvqp")
+
+[connection signal="body_entered" from="attack" to="attack" method="_on_body_entered"]

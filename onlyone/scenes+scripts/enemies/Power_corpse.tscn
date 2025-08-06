@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpyorpnnvsih8"]
+
+[ext_resource type="Script" uid="uid://bkyvsw8gsunua" path="res://scenes+scripts/enemies/power_corpse.gd" id="1_fxstu"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="2_fxstu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ew1hj"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_crgk7"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.454545, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_ew1hj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0625, 1), 0.0, 0.0, 0, 0, Vector2(0.613636, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d1k8"]
+radius = 12.0416
+
+[node name="corpse" type="CharacterBody2D" groups=["corpse"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_fxstu")
+
+[node name="square" type="Polygon2D" parent="."]
+color = Color(0.699219, 0.45, 1, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, 0, 9, -4, 8, -8, 4, -9, 0, -9, -4, -9, -8, -8, -9, -4, -9, 0, -9, 4, -8, 8, -4, 9, 0, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("CircleShape2D_ew1hj")
+disabled = true
+debug_color = Color(0, 1, 0.05, 0.419608)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 90
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.99
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_crgk7")
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_ew1hj")
+color = Color(0.741883, 0.527344, 1, 1)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="constantParticles" type="CPUParticles2D" parent="."]
+amount = 5
+lifetime = 0.25
+speed_scale = 0.5
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_crgk7")
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_ew1hj")
+color = Color(0.814412, 0.660156, 1, 1)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="SightComponent" type="Area2D" parent="."]
+script = ExtResource("2_fxstu")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightComponent"]
+shape = SubResource("CircleShape2D_8d1k8")
+debug_color = Color(0.7, 0, 0.688333, 0)

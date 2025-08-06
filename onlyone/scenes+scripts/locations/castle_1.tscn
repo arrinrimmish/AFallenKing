@@ -1,0 +1,203 @@
+[gd_scene load_steps=9 format=3 uid="uid://qi6kle13cvjk"]
+
+[ext_resource type="PackedScene" uid="uid://b7wk6iu3uag36" path="res://scenes+scripts/player/player.tscn" id="1_2qask"]
+[ext_resource type="Script" uid="uid://243fyxwpruqb" path="res://scenes+scripts/locations/castle_1.gd" id="1_p441e"]
+[ext_resource type="PackedScene" uid="uid://b2imdda243uje" path="res://scenes+scripts/enemies/soldier_enemy.tscn" id="2_s1nih"]
+[ext_resource type="PackedScene" uid="uid://dnx606ev1bp5p" path="res://scenes+scripts/enemies/assasin_enemy.tscn" id="3_0hvmn"]
+[ext_resource type="PackedScene" uid="uid://c7ygbtm2co81t" path="res://scenes+scripts/enemies/knight.tscn" id="5_ohmcx"]
+[ext_resource type="PackedScene" uid="uid://bcyxqnsxwd7ch" path="res://scenes+scripts/enemies/squire_enemy.tscn" id="6_ohmcx"]
+[ext_resource type="PackedScene" uid="uid://yix0kviu5f7m" path="res://scenes+scripts/misc/civilian.tscn" id="7_jxutc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxutc"]
+size = Vector2(768, 436)
+
+[node name="castle1" type="Node2D" node_paths=PackedStringArray("bossFightWall", "knight", "starter", "center")]
+script = ExtResource("1_p441e")
+path = null
+bossFightWall = NodePath("bossFightBlock")
+knight = NodePath("knight")
+starter = NodePath("knightStartingPos")
+center = NodePath("center")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(-252, -93)
+color = Color(0.265625, 0.231384, 0.263485, 1)
+polygon = PackedVector2Array(-2233, -2570, 3811, -2543, 2817, 1316, -3325, 788)
+
+[node name="player" parent="." instance=ExtResource("1_2qask")]
+position = Vector2(0, 85)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(168, 151, 168, -977, -29, -1242, -29, -1484, -631, -1484, -838, -1707, -842, -1761, 1742, -2657, 2317, -925, 316, 319, -457, 339, -1055, -1123, -1188, -1777, -1084, -1774, -1064, -1584, -801, -1298, -801, -1044, -276, -1044, -154, -936, -154, 56)
+
+[node name="bossFightBlock" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bossFightBlock"]
+position = Vector2(0, -196)
+polygon = PackedVector2Array(-30, -1046, -30, -1243, -11, -1217, -11, -1028)
+
+[node name="Polygon2D" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-31, -1046, -10, -1026, -10, -1242, -31, -1242)
+
+[node name="doors" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D"]
+position = Vector2(1, 0)
+color = Color(0.710938, 0.710938, 0.710938, 1)
+polygon = PackedVector2Array(-31, -1046, -31, -1243, -12, -1217, -12, -1028)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="bossFightBlock"]
+position = Vector2(-245, 0)
+polygon = PackedVector2Array(-276, -1045, -31, -1045, -12, -1027, -256, -1027)
+
+[node name="Polygon2D" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-31, -1046, -10, -1026, -276, -1026, -276, -1046)
+
+[node name="doors" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D2"]
+position = Vector2(0, 1)
+color = Color(0.710938, 0.710938, 0.710938, 1)
+polygon = PackedVector2Array(-276, -1046, -31, -1046, -12, -1028, -256, -1028)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="bossFightBlock"]
+position = Vector2(170, 0)
+polygon = PackedVector2Array(-799, -1483, -631, -1483, -644, -1497, -815, -1497)
+
+[node name="outline" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D3"]
+position = Vector2(0, -1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-817, -1497, -799, -1481, -631, -1481, -631, -1497)
+
+[node name="doors" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D3"]
+position = Vector2(0, -1)
+color = Color(0.710938, 0.710938, 0.710938, 1)
+polygon = PackedVector2Array(-799, -1482, -631, -1482, -644, -1496, -815, -1496)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="bossFightBlock"]
+position = Vector2(0, 183)
+polygon = PackedVector2Array(-800, -1298, -800, -1482, -816, -1496, -816, -1315)
+
+[node name="outline" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D4"]
+position = Vector2(-1, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-816, -1498, -798, -1482, -798, -1299, -816, -1299)
+
+[node name="Polygon2D" type="Polygon2D" parent="bossFightBlock/CollisionPolygon2D4"]
+position = Vector2(-1, 0)
+color = Color(0.710938, 0.710938, 0.710938, 1)
+polygon = PackedVector2Array(-799, -1298, -799, -1482, -815, -1496, -815, -1315)
+
+[node name="walls" type="Polygon2D" parent="."]
+color = Color(0.306381, 0.0253143, 0.308594, 1)
+polygon = PackedVector2Array(168, 151, 168, -977, -29, -1242, -29, -1484, -631, -1484, -842, -1708, -842, -2028, 1742, -2657, 2317, -925, 316, 319, -457, 339, -1350, -452, -2840, -1158, -1380, -2071, -1084, -2284, -1084, -1774, -1064, -1584, -801, -1298, -801, -1044, -276, -1044, -154, -936, -154, 56)
+
+[node name="enemy" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(-83, -254)
+
+[node name="enemy2" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(-27, -269)
+
+[node name="enemy3" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(41, -475)
+
+[node name="enemy4" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(111, -481)
+
+[node name="enemy5" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(-112, -601)
+
+[node name="enemy6" parent="." instance=ExtResource("2_s1nih")]
+position = Vector2(79, -423)
+
+[node name="assasinEnemy" parent="." instance=ExtResource("3_0hvmn")]
+position = Vector2(-111, -840)
+
+[node name="assasinEnemy2" parent="." instance=ExtResource("3_0hvmn")]
+position = Vector2(-4, -762)
+
+[node name="assasinEnemy3" parent="." instance=ExtResource("3_0hvmn")]
+position = Vector2(132, -844)
+
+[node name="knight" parent="." instance=ExtResource("5_ohmcx")]
+position = Vector2(593, -1688)
+
+[node name="knightStartingPos" type="Marker2D" parent="."]
+position = Vector2(-415, -1264)
+
+[node name="enterFight" type="Area2D" parent="."]
+position = Vector2(-257, -1198)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterFight"]
+position = Vector2(-158, -66)
+shape = SubResource("RectangleShape2D_jxutc")
+
+[node name="enemy7" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-493, -1220)
+
+[node name="enemy8" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-438, -1200)
+
+[node name="enemy9" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-323, -1279)
+
+[node name="enemy10" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-443, -1268)
+
+[node name="enemy11" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-464, -1148)
+
+[node name="enemy12" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-350, -1158)
+
+[node name="enemy13" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-393, -1226)
+
+[node name="enemy14" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-367, -1299)
+
+[node name="enemy15" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-232, -1258)
+
+[node name="enemy16" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-330, -1106)
+
+[node name="enemy17" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-312, -1206)
+
+[node name="enemy18" parent="." instance=ExtResource("6_ohmcx")]
+position = Vector2(-415, -1139)
+
+[node name="civilian2" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-580, -1366)
+
+[node name="civilian3" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-669, -1371)
+
+[node name="civilian6" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-692, -1329)
+
+[node name="civilian7" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-639, -1422)
+
+[node name="civilian8" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-582, -1430)
+
+[node name="civilian9" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-739, -1367)
+
+[node name="civilian10" parent="." instance=ExtResource("7_jxutc")]
+position = Vector2(-626, -1345)
+
+[node name="center" type="Marker2D" parent="."]
+position = Vector2(-415, -1264)
+
+[node name="nextScene" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="nextScene"]
+polygon = PackedVector2Array(-1073, -1668, -839, -1708, -834, -1762, -1083, -1749)
+
+[connection signal="body_entered" from="enterFight" to="." method="_on_enter_fight_body_entered"]
+[connection signal="body_exited" from="enterFight" to="." method="_on_enter_fight_body_exited"]
+[connection signal="body_entered" from="nextScene" to="." method="_on_next_scene_body_entered"]

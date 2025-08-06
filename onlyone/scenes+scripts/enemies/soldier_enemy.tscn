@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2imdda243uje"]
+
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_cl5xy"]
+[ext_resource type="Script" uid="uid://u1p2n8y25bti" path="res://scenes+scripts/enemies/enemy.gd" id="1_mcuwf"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="2_73eny"]
+[ext_resource type="Script" uid="uid://bs1fpi6rmevxb" path="res://components/knock_back_component.gd" id="3_mcuwf"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="4_4qdn0"]
+[ext_resource type="Script" uid="uid://dwc5cigoae484" path="res://states/enemy_move_state.gd" id="5_gq80y"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="6_73eny"]
+[ext_resource type="Script" uid="uid://demybg254lvvm" path="res://states/enemy_slash_state.gd" id="8_4qdn0"]
+[ext_resource type="Script" uid="uid://dxi0ool53mere" path="res://scenes+scripts/enemies/attacks/sword.gd" id="9_gq80y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcuwf"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qdn0"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7l82"]
+radius = 9.0
+
+[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+script = ExtResource("1_mcuwf")
+
+[node name="sightComponent" type="Area2D" parent="."]
+script = ExtResource("6_73eny")
+targetGroup = "player"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sightComponent"]
+visible = false
+shape = SubResource("CircleShape2D_mcuwf")
+debug_color = Color(1, 0, 0, 0)
+
+[node name="closeSightComp" type="Area2D" parent="."]
+script = ExtResource("6_73eny")
+targetGroup = "enemy"
+canLeave = true
+storeAll = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closeSightComp"]
+shape = SubResource("CircleShape2D_4qdn0")
+debug_color = Color(1, 0, 0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f7l82")
+
+[node name="square" type="Polygon2D" parent="."]
+color = Color(0.764706, 1, 1, 1)
+polygon = PackedVector2Array(9, 9, 9, 2, 7, 2, 7, -2, 9, -2, 9, -9, 2, -9, 2, -7, -2, -7, -2, -9, -9, -9, -9, -2, -7, -2, -7, 2, -9, 2, -9, 9, -2, 9, -2, 7, 2, 7, 2, 9)
+
+[node name="square" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="." node_paths=PackedStringArray("holder", "healthComponent", "knockbackComponent")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_cl5xy")
+holder = NodePath("..")
+healthComponent = NodePath("../HealthComponent")
+knockbackComponent = NodePath("../KnockBackComponent")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_f7l82")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("2_73eny")
+holder = NodePath("..")
+maxHealth = 1.0
+metadata/_custom_type_script = "uid://drmqdd5v2r0ab"
+
+[node name="KnockBackComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("3_mcuwf")
+holder = NodePath("..")
+resistance = 1.0
+metadata/_custom_type_script = "uid://bs1fpi6rmevxb"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+script = ExtResource("4_4qdn0")
+baseState = NodePath("enemyMoveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="enemyMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("5_gq80y")
+see = NodePath("../../sightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 40.0
+attackRange = 37.0
+stopRange = 37.0
+tool = NodePath("../../sword")
+holder = NodePath("../..")
+speed = 900.0
+drag = 750.0
+maxSpeed = 80.0
+character = NodePath("../../square")
+attack1 = NodePath("../enemySlashState")
+
+[node name="enemySlashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "nextState", "sword")]
+script = ExtResource("8_4qdn0")
+holder = NodePath("../..")
+sight = NodePath("../../sightComponent")
+nextState = NodePath("../enemyMoveState")
+sword = NodePath("../../sword")
+
+[node name="sword" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("9_gq80y")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="sword"]
+rotation = -0.616101
+polygon = PackedVector2Array(9, -13, 18, -24, 13, -9)
+
+[node name="outline" type="Polygon2D" parent="sword/CollisionPolygon2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(8, -13, 19, -26, 13, -8, 8.40369, -12.677)
+
+[node name="Polygon2D" type="Polygon2D" parent="sword/CollisionPolygon2D"]
+color = Color(0.703125, 0.703125, 0.703125, 1)
+polygon = PackedVector2Array(9, -13, 10.5858, -14.9382, 11, -14, 12, -17, 18, -24, 13, -9)
+
+[connection signal="body_entered" from="sightComponent" to="sightComponent" method="_on_body_entered"]
+[connection signal="body_entered" from="closeSightComp" to="closeSightComp" method="_on_body_entered"]
+[connection signal="body_exited" from="closeSightComp" to="closeSightComp" method="_on_body_exited"]
+[connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]

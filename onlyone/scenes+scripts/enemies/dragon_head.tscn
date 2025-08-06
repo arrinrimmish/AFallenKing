@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://co1g6ktineytf"]
+
+[ext_resource type="Script" uid="uid://bphondk1ssmnc" path="res://scenes+scripts/enemies/dragon_head.gd" id="1_nmqyr"]
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_w57dw"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="3_h1jn2"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="4_g4g5b"]
+[ext_resource type="Script" uid="uid://b1khihwwwpnj7" path="res://states/head_move_state.gd" id="5_g4g5b"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="6_abt30"]
+[ext_resource type="Script" uid="uid://dxi0ool53mere" path="res://scenes+scripts/enemies/attacks/sword.gd" id="7_abt30"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ww78f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0qrm"]
+radius = 475.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f1v7d"]
+radius = 13.0
+
+[node name="dragonHead" type="CharacterBody2D" node_paths=PackedStringArray("dragonPieces", "healthComp", "invTimer", "cooldown") groups=["dragon", "enemy"]]
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_nmqyr")
+dragonPieces = NodePath("draonParts")
+healthComp = NodePath("HealthComponent")
+size = 8
+invTimer = NodePath("invTimer")
+cooldown = NodePath("cooldown")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ww78f")
+
+[node name="SightComponent" type="Area2D" parent="."]
+visible = false
+script = ExtResource("6_abt30")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightComponent"]
+shape = SubResource("CircleShape2D_m0qrm")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="." node_paths=PackedStringArray("holder", "healthComponent")]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_w57dw")
+holder = NodePath("..")
+healthComponent = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_ww78f")
+
+[node name="draonParts" type="Node" parent="."]
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("3_h1jn2")
+holder = NodePath("..")
+maxHealth = 1.0
+notifyHolder = true
+metadata/_custom_type_script = "uid://drmqdd5v2r0ab"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+script = ExtResource("4_g4g5b")
+baseState = NodePath("headMoveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="headMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow", "point", "sight", "holder", "character")]
+script = ExtResource("5_g4g5b")
+follow = NodePath("../../follow")
+point = NodePath("../../follow/point")
+sight = NodePath("../../SightComponent")
+rotateSpeed = 150.0
+holder = NodePath("../..")
+speed = 100.0
+drag = 750.0
+maxSpeed = 200.0
+character = NodePath("../../square")
+
+[node name="follow" type="Node2D" parent="."]
+
+[node name="point" type="Marker2D" parent="follow"]
+position = Vector2(1, 0)
+
+[node name="square" type="Polygon2D" parent="."]
+scale = Vector2(1.5, 1.5)
+color = Color(0.492188, 0.492188, 0.492188, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, 0, 9, -4, 8, -8, 4, -9, 0, -9, -4, -9, -8, -8, -9, -4, -9, 0, -9, 4, -8, 8, -4, 9, 0, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="invTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="cooldown" type="Timer" parent="."]
+autostart = true
+
+[node name="attack" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("7_abt30")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+shape = SubResource("CircleShape2D_f1v7d")
+
+[connection signal="body_entered" from="attack" to="attack" method="_on_body_entered"]

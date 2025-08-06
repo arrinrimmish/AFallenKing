@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://856egnoivpv"]
+
+[ext_resource type="Script" uid="uid://cnqacrl1uwhoj" path="res://scenes+scripts/player/attacks/blast.gd" id="1_qt11g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhf2h"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qt11g"]
+radius = 13.6364
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xs12y"]
+
+[sub_resource type="Curve" id="Curve_qt11g"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.170455, 1), 0.0, 0.0, 0, 0, Vector2(0.568182, 0.820225), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_qt11g"]
+colors = PackedColorArray(0.481572, 0.273148, 0.597656, 1, 0.81189, 0.476563, 1, 1)
+
+[node name="blast" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_qt11g")
+speed = 1200.0
+maxSpeed = 600.0
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("CircleShape2D_nhf2h")
+
+[node name="triangle" type="Polygon2D" parent="."]
+position = Vector2(0, 5.96046e-08)
+rotation = 1.5708
+scale = Vector2(3.5, 3.5)
+color = Color(0.69, 0, 0.69, 1)
+polygon = PackedVector2Array(0, -2.5, 1, 0, -1, 0)
+
+[node name="triangle" type="Polygon2D" parent="triangle"]
+show_behind_parent = true
+position = Vector2(0, 0.35)
+scale = Vector2(1.4, 1.4)
+polygon = PackedVector2Array(0, -2.5, 1, 0, -1, 0)
+
+[node name="Area2D" type="Area2D" parent="triangle"]
+position = Vector2(-1.70299e-08, 6.1648e-14)
+rotation = -1.5708
+scale = Vector2(0.285714, 0.285714)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="triangle/Area2D"]
+position = Vector2(3, 0)
+scale = Vector2(1.65, 1.65)
+shape = SubResource("CircleShape2D_qt11g")
+
+[node name="blastRadius" type="Area2D" parent="triangle"]
+position = Vector2(-3.11988e-06, -0.857143)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="triangle/blastRadius"]
+shape = SubResource("CircleShape2D_xs12y")
+disabled = true
+debug_color = Color(1, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.12
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+scale = Vector2(2, 2)
+emitting = false
+amount = 60
+lifetime = 0.35
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.25
+orbit_velocity_max = 0.35
+radial_accel_max = 45.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 3.5
+scale_amount_curve = SubResource("Curve_qt11g")
+color_initial_ramp = SubResource("Gradient_qt11g")
+
+[connection signal="body_entered" from="triangle/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="triangle/blastRadius" to="." method="_on_blast_radius_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

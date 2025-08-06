@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp1pcw3hlumbs"]
+
+[ext_resource type="PackedScene" uid="uid://b5hoxoa7cmd61" path="res://scenes+scripts/enemies/mage_boss.tscn" id="1_rsjqc"]
+[ext_resource type="PackedScene" uid="uid://b7wk6iu3uag36" path="res://scenes+scripts/player/player.tscn" id="2_5cta2"]
+[ext_resource type="PackedScene" uid="uid://cvnb4moh1m5n5" path="res://scenes+scripts/enemies/corpse.tscn" id="3_5cta2"]
+[ext_resource type="PackedScene" uid="uid://cpyorpnnvsih8" path="res://scenes+scripts/enemies/Power_corpse.tscn" id="4_8bfpm"]
+
+[node name="MageBossRoom" type="Node2D"]
+
+[node name="Ground" type="Polygon2D" parent="."]
+color = Color(0.429688, 0.429688, 0.429688, 1)
+polygon = PackedVector2Array(300, -200, 300, 200, -300, 200, -300, -200)
+
+[node name="walls" type="Polygon2D" parent="Ground"]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 800.0
+polygon = PackedVector2Array(300, -200, 300, 200, -300, 200, -300, -200)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-301, 200, 300, 200, 300, -200, -301, -200, -301, 200, -347, -214, 336, -223, 389, 252)
+
+[node name="MageBoss" parent="." instance=ExtResource("1_rsjqc")]
+
+[node name="player" parent="." instance=ExtResource("2_5cta2")]
+position = Vector2(-257, 171)
+
+[node name="corpse" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-140, -39)
+
+[node name="corpse2" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-3, -69)
+
+[node name="corpse3" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(113, -73)
+
+[node name="corpse4" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(157, 32)
+
+[node name="corpse5" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(150, 119)
+
+[node name="corpse6" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(40, 135)
+
+[node name="corpse7" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-73, 113)
+
+[node name="corpse8" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-149, 80)
+
+[node name="corpse9" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-107, 28)
+
+[node name="corpse10" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-14, 57)
+
+[node name="corpse11" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-84, -16)
+
+[node name="corpse12" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(95, -46)
+
+[node name="corpse13" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(108, 10)
+
+[node name="corpse14" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(199, -19)
+
+[node name="corpse15" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(-94, -90)
+
+[node name="corpse16" parent="." instance=ExtResource("3_5cta2")]
+position = Vector2(72, -100)
+
+[node name="corpse17" parent="." instance=ExtResource("4_8bfpm")]
+position = Vector2(-285, 126)

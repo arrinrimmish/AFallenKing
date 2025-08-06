@@ -1,0 +1,138 @@
+[gd_scene load_steps=6 format=3 uid="uid://diq4jsqy4a8px"]
+
+[ext_resource type="PackedScene" uid="uid://mwbfhwclysw1" path="res://scenes+scripts/enemies/king_boss.tscn" id="1_eb1sp"]
+[ext_resource type="PackedScene" uid="uid://b7wk6iu3uag36" path="res://scenes+scripts/player/player.tscn" id="2_fb0wq"]
+[ext_resource type="PackedScene" uid="uid://cpyorpnnvsih8" path="res://scenes+scripts/enemies/Power_corpse.tscn" id="3_fb0wq"]
+[ext_resource type="PackedScene" uid="uid://cvnb4moh1m5n5" path="res://scenes+scripts/enemies/corpse.tscn" id="4_ted6y"]
+[ext_resource type="PackedScene" uid="uid://yix0kviu5f7m" path="res://scenes+scripts/misc/civilian.tscn" id="5_dik00"]
+
+[node name="KingBossRoom" type="Node2D"]
+
+[node name="Ground" type="Polygon2D" parent="."]
+color = Color(0.429688, 0.429688, 0.429688, 1)
+polygon = PackedVector2Array(300, -200, 300, 507, -300, 507, -300, -200)
+
+[node name="walls" type="Polygon2D" parent="Ground"]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 800.0
+polygon = PackedVector2Array(300, -200, 300, 507, -300, 507, -300, -200)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 49
+collision_mask = 49
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-305, 81, 299, 78, 300, -200, -301, -200, -301, 507, -347, -214, 336, -223, 419, 605)
+
+[node name="kingBoss" parent="." instance=ExtResource("1_eb1sp")]
+position = Vector2(0, -174)
+
+[node name="player" parent="." instance=ExtResource("2_fb0wq")]
+position = Vector2(-293, 70)
+
+[node name="corpse" parent="." instance=ExtResource("3_fb0wq")]
+position = Vector2(-189, 50)
+
+[node name="corpse2" parent="." instance=ExtResource("3_fb0wq")]
+position = Vector2(-255, 58)
+
+[node name="corpse3" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-132, -56)
+
+[node name="corpse4" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(7, -53)
+
+[node name="corpse5" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(162, 13)
+
+[node name="corpse6" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(164, -108)
+
+[node name="corpse7" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-156, -126)
+
+[node name="corpse15" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-240, -160)
+
+[node name="corpse16" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-192, -87)
+
+[node name="corpse17" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-192, -25)
+
+[node name="corpse18" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-84, 20)
+
+[node name="corpse19" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-84, 20)
+
+[node name="corpse20" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-40, -15)
+
+[node name="corpse21" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-72, -45)
+
+[node name="corpse22" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(99, -41)
+
+[node name="corpse23" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(133, -106)
+
+[node name="corpse24" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(125, -154)
+
+[node name="corpse25" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(222, -70)
+
+[node name="corpse26" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(229, -25)
+
+[node name="corpse27" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(40, 15)
+
+[node name="corpse28" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-26, 23)
+
+[node name="corpse29" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(62, -62)
+
+[node name="corpse8" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-117, 24)
+
+[node name="corpse9" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-236, -71)
+
+[node name="corpse10" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(-67, -106)
+
+[node name="corpse11" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(41, -127)
+
+[node name="corpse12" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(139, -35)
+
+[node name="corpse13" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(239, 33)
+
+[node name="corpse14" parent="." instance=ExtResource("4_ted6y")]
+position = Vector2(242, -149)
+
+[node name="civilian" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(-137, -132)
+
+[node name="civilian2" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(-84, -106)
+
+[node name="civilian3" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(-53, -1)
+
+[node name="civilian4" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(162, -47)
+
+[node name="civilian5" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(154, -132)
+
+[node name="civilian6" parent="." instance=ExtResource("5_dik00")]
+position = Vector2(23, -50)

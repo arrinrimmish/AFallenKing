@@ -1,0 +1,639 @@
+[gd_scene load_steps=38 format=3 uid="uid://b7wk6iu3uag36"]
+
+[ext_resource type="Script" uid="uid://c16ul6e6r42bq" path="res://scenes+scripts/player/player.gd" id="1_6o1oh"]
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_itxrg"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="2_7j2k5"]
+[ext_resource type="Script" uid="uid://bs1fpi6rmevxb" path="res://components/knock_back_component.gd" id="4_icydw"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="5_icydw"]
+[ext_resource type="Script" uid="uid://vlg2iu3e1kk" path="res://states/blast_state.gd" id="7_cbflk"]
+[ext_resource type="Script" uid="uid://bufw0ua1i6tps" path="res://states/playerMoveState.gd" id="7_utr5e"]
+[ext_resource type="Script" uid="uid://h6btm7ntmji2" path="res://states/spirit_state.gd" id="8_v6dqi"]
+[ext_resource type="Script" uid="uid://cxvlm284ywjbj" path="res://states/player_dead_state.gd" id="9_instw"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="9_qiveb"]
+[ext_resource type="Script" uid="uid://cxbhktkkrarn7" path="res://states/heal_state.gd" id="11_utr5e"]
+[ext_resource type="FontFile" uid="uid://b0qjr217aad4d" path="res://CinzelFont/static/Cinzel-Medium.ttf" id="12_2sx5t"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2sx5t"]
+polygon = PackedVector2Array(-9, -9, -9, 9, 9, 9, 9, -9)
+
+[sub_resource type="Gradient" id="Gradient_onuo3"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w4uqr"]
+gradient = SubResource("Gradient_onuo3")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_kh82y"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mwwts"]
+gradient = SubResource("Gradient_kh82y")
+width = 20
+height = 20
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7j2k5"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_instw"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qiveb"]
+radius = 100.0
+
+[sub_resource type="Curve" id="Curve_cbflk"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.454545, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_v6dqi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0625, 1), 0.0, 0.0, 0, 0, Vector2(0.613636, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_8i8l0"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_onuo3"]
+gradient = SubResource("Gradient_8i8l0")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2sx5t"]
+radius = 7.0
+
+[sub_resource type="Gradient" id="Gradient_qiveb"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_instw"]
+gradient = SubResource("Gradient_qiveb")
+width = 20
+
+[sub_resource type="Gradient" id="Gradient_utr5e"]
+colors = PackedColorArray(0.321167, 0, 0.47, 1, 0.682353, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2sx5t"]
+gradient = SubResource("Gradient_utr5e")
+width = 20
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_2sx5t"]
+offsets = PackedFloat32Array(0, 0.1, 0.5, 0.9, 1)
+colors = PackedColorArray(0.803922, 0.247059, 0.247059, 1, 0.980462, 0.314026, 0.314026, 1, 0.988281, 0.424652, 0.424652, 1, 0.980462, 0.314026, 0.314026, 1, 0.803922, 0.247059, 0.247059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8i8l0"]
+gradient = SubResource("Gradient_2sx5t")
+width = 256
+height = 6
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_mwwts"]
+offsets = PackedFloat32Array(0.690141)
+colors = PackedColorArray(0.980469, 0.382996, 0.91512, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_en4wu"]
+gradient = SubResource("Gradient_mwwts")
+width = 8
+height = 6
+
+[sub_resource type="Gradient" id="Gradient_en4wu"]
+offsets = PackedFloat32Array(0.690141)
+colors = PackedColorArray(0.390625, 0.170898, 0.366592, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj3fw"]
+gradient = SubResource("Gradient_en4wu")
+width = 8
+height = 6
+
+[sub_resource type="Gradient" id="Gradient_uj3fw"]
+offsets = PackedFloat32Array(0.690141)
+colors = PackedColorArray(0.707031, 0.295517, 0.662022, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kh82y"]
+gradient = SubResource("Gradient_uj3fw")
+width = 8
+height = 6
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("healthComp", "mask", "empty", "hitPoint", "healthBar", "particles", "character", "bossBar", "bossLabel", "pauseScreen", "questionBox", "cursor", "stateMachine", "deadState") groups=["player"]]
+process_mode = 3
+motion_mode = 1
+script = ExtResource("1_6o1oh")
+healthComp = NodePath("components/healthComponent")
+mask = NodePath("CanvasLayer/HealthBar/mask")
+empty = NodePath("CanvasLayer/HealthBar/empty")
+hitPoint = NodePath("CanvasLayer/HealthBar/mask/hp1")
+healthBar = NodePath("CanvasLayer/HealthBar")
+particles = NodePath("CPUParticles2D")
+character = NodePath("square")
+bossBar = NodePath("CanvasLayer/bossBar")
+bossLabel = NodePath("CanvasLayer/bossBar/name")
+pauseScreen = NodePath("CanvasLayer/pauseScreen")
+questionBox = NodePath("CanvasLayer/questionBox")
+cursor = NodePath("cursor")
+stateMachine = NodePath("StateMachine")
+deadState = NodePath("StateMachine/playerDeadState")
+
+[node name="corpseLine" type="Line2D" parent="."]
+process_mode = 1
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(0.644531, 0.605291, 0.501022, 1)
+
+[node name="square" type="Polygon2D" parent="."]
+process_mode = 1
+light_mask = 2
+z_index = 1
+color = Color(0.683333, 0, 1, 1)
+polygon = PackedVector2Array(9, 9, 8, 3, 6, 0, 8, -3, 9, -9, 3, -8, 0, -6, -3, -8, -9, -9, -8, -3, -6, 0, -8, 3, -9, 9, -3, 8, 0, 6, 3, 8)
+
+[node name="Polygon2D" type="Polygon2D" parent="square"]
+process_mode = 1
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="square"]
+occluder = SubResource("OccluderPolygon2D_2sx5t")
+
+[node name="PointLight2D" type="PointLight2D" parent="square"]
+color = Color(0.905791, 0.519531, 1, 1)
+energy = 0.75
+range_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_w4uqr")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="square"]
+light_mask = 2
+scale = Vector2(0.99, 0.99)
+texture = SubResource("GradientTexture2D_mwwts")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="components" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="components" node_paths=PackedStringArray("holder", "healthComponent", "knockbackComponent", "iframeTimer")]
+process_mode = 1
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_itxrg")
+holder = NodePath("../..")
+healthComponent = NodePath("../healthComponent")
+knockbackComponent = NodePath("../knockBackComponent")
+iframeTimer = NodePath("../../iFrameTimer")
+makeInv = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="components/HitBoxComponent"]
+shape = SubResource("CircleShape2D_7j2k5")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="healthComponent" type="Node" parent="components" node_paths=PackedStringArray("holder")]
+process_mode = 1
+script = ExtResource("2_7j2k5")
+holder = NodePath("../..")
+maxHealth = 4.0
+notifyHolder = true
+
+[node name="knockBackComponent" type="Node" parent="components" node_paths=PackedStringArray("holder")]
+process_mode = 1
+script = ExtResource("4_icydw")
+holder = NodePath("../..")
+resistance = 1.0
+
+[node name="nomCorpseComp" type="Area2D" parent="components"]
+process_mode = 1
+visible = false
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_qiveb")
+targetGroup = "corpse"
+canLeave = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="components/nomCorpseComp"]
+process_mode = 1
+shape = SubResource("CircleShape2D_instw")
+debug_color = Color(0.181333, 0.64, 0, 0)
+
+[node name="seeCorspeComp" type="Area2D" parent="components"]
+process_mode = 1
+visible = false
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_qiveb")
+targetGroup = "corpse"
+canLeave = true
+pickClosest = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="components/seeCorspeComp"]
+process_mode = 1
+shape = SubResource("CircleShape2D_qiveb")
+debug_color = Color(0.268333, 0.7, 0, 0)
+
+[node name="bodyCollision" type="CollisionShape2D" parent="."]
+process_mode = 1
+shape = SubResource("CircleShape2D_7j2k5")
+debug_color = Color(0, 0.595, 0.7, 0)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+process_mode = 1
+script = ExtResource("5_icydw")
+baseState = NodePath("moveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="moveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("pickCorpseSight", "line", "holder", "character", "attack1", "heal1")]
+process_mode = 1
+script = ExtResource("7_utr5e")
+pickCorpseSight = NodePath("../../components/nomCorpseComp")
+line = NodePath("../../corpseLine")
+holder = NodePath("../..")
+speed = 1100.0
+drag = 750.0
+maxSpeed = 300.0
+character = NodePath("../../square")
+attack1 = NodePath("../blastState")
+heal1 = NodePath("../healState")
+
+[node name="blastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "nextState")]
+process_mode = 1
+script = ExtResource("7_cbflk")
+holder = NodePath("../..")
+nextState = NodePath("../spiritState")
+
+[node name="spiritState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "point", "body", "particles", "sight", "goToSight", "nextState", "spirit", "progressBar", "hitBoxhComp", "healthComp", "iframeTimer", "collision", "attackCollision")]
+process_mode = 1
+script = ExtResource("8_v6dqi")
+holder = NodePath("../..")
+speed = 12500.0
+rotationSpeed = 450.0
+point = NodePath("../../spiritPoint")
+body = NodePath("../../square")
+particles = NodePath("../../CPUParticles2D")
+sight = NodePath("../../components/nomCorpseComp")
+goToSight = NodePath("../../components/seeCorspeComp")
+nextState = NodePath("../moveState")
+spirit = NodePath("../../spirit")
+lengths = PackedInt32Array(1, 5, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2)
+progressBar = NodePath("../../CanvasLayer/spiritTime")
+spiritTime = 5.0
+hitBoxhComp = NodePath("../../components/HitBoxComponent")
+healthComp = NodePath("../../components/healthComponent")
+iframeTimer = NodePath("../../iFrameTimer")
+collision = NodePath("../../bodyCollision")
+attackCollision = NodePath("../../spirit/head/damage/CollisionShape2D")
+
+[node name="playerDeadState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "healthComp")]
+process_mode = 1
+script = ExtResource("9_instw")
+holder = NodePath("../..")
+healthComp = NodePath("../../components/healthComponent")
+
+[node name="healState" type="Node" parent="StateMachine" node_paths=PackedStringArray("healthComp", "nextState", "previousState")]
+process_mode = 1
+script = ExtResource("11_utr5e")
+healthComp = NodePath("../../components/healthComponent")
+nextState = NodePath("../spiritState")
+previousState = NodePath("../moveState")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+process_mode = 1
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.99
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+angular_velocity_min = -9.0
+angular_velocity_max = 9.0
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("Curve_cbflk")
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_v6dqi")
+color = Color(0.664333, 0.47, 1, 1)
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
+[node name="spirit" type="Node" parent="."]
+process_mode = 1
+
+[node name="head" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(42, 1)
+color = Color(0.683333, 0, 1, 1)
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+
+[node name="PointLight2D" type="PointLight2D" parent="spirit/head"]
+color = Color(0.803922, 0, 1, 1)
+energy = 1.5
+texture = SubResource("GradientTexture2D_onuo3")
+
+[node name="damage" type="Area2D" parent="spirit/head"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spirit/head/damage"]
+shape = SubResource("CircleShape2D_2sx5t")
+disabled = true
+
+[node name="seg1" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-25, -12)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-3, 0, 0, -4, 3, 0, 0, 4)
+
+[node name="seg2" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-35, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg9" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-35, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg10" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-35, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-2, 0, 0, -3, 2, 0, 0, 3)
+
+[node name="seg3" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-53, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg6" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-56, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg7" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-56, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg8" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-56, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -2, 1, 0, 0, 2)
+
+[node name="seg4" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-63, -13)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-1, 0, 0, -1, 1, 0, 0, 1)
+
+[node name="seg5" type="Polygon2D" parent="spirit"]
+visible = false
+position = Vector2(-80, -14)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(-4, 0, 0, -1, 1, 0, 0, 1)
+
+[node name="spiritPoint" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Marker2D" type="Marker2D" parent="spiritPoint"]
+position = Vector2(1, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="spiritTime" type="TextureProgressBar" parent="CanvasLayer"]
+process_mode = 1
+visible = false
+offset_left = 6.0
+offset_top = 25.5
+offset_right = 26.0
+offset_bottom = 89.5
+scale = Vector2(0.8, 0.8)
+max_value = 5.0
+step = 0.0
+value = 2.5
+fill_mode = 3
+texture_under = SubResource("GradientTexture2D_instw")
+texture_progress = SubResource("GradientTexture2D_2sx5t")
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/spiritTime"]
+process_mode = 1
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-2, -2, 22, -2, 22, 66, -2, 66)
+
+[node name="HealthBar" type="Polygon2D" parent="CanvasLayer"]
+process_mode = 1
+position = Vector2(18.75, 21.75)
+scale = Vector2(0.8, 0.8)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -5, 0, -17, 313, -17, 316, -11, 313, -5)
+
+[node name="mask" type="Polygon2D" parent="CanvasLayer/HealthBar"]
+process_mode = 1
+clip_children = 1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 0, -22, 22, -22, 22, 0)
+
+[node name="hp1" type="Polygon2D" parent="CanvasLayer/HealthBar/mask"]
+position = Vector2(11, -11)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(0, -10, -8, -2, -8, 2, 0, 10, 10, 0, 0, 4, -4, 0, 0, -4, 0, 4, 5.27729, -5.77816)
+
+[node name="empty" type="Polygon2D" parent="CanvasLayer/HealthBar"]
+process_mode = 1
+clip_children = 1
+color = Color(0, 0, 0, 0.392157)
+polygon = PackedVector2Array(0, 0, 0, -22, 22, -22, 22, 0)
+
+[node name="hp1" type="Polygon2D" parent="CanvasLayer/HealthBar/empty"]
+process_mode = 1
+position = Vector2(11, -11)
+color = Color(0.682353, 0, 1, 1)
+polygon = PackedVector2Array(0, -10, -8, -2, -8, 2, 0, 10, 10, 0, 0, 4, -4, 0, 0, -4, 0, 4, 5.27729, -5.77816)
+
+[node name="circle" type="Polygon2D" parent="CanvasLayer/HealthBar"]
+process_mode = 1
+show_behind_parent = true
+position = Vector2(-9.5, -11)
+scale = Vector2(1.2, 1.2)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(8.18182, 8.18182, 10, 0, 8.18182, -8.18182, 0, -10, -8.18182, -8.18182, -10, 0, -8.18182, 8.18182, 0, 9.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/HealthBar/circle"]
+process_mode = 1
+scale = Vector2(1.2, 1.2)
+color = Color(0.809344, 0.450134, 0.976563, 1)
+polygon = PackedVector2Array(0, -6, 3, -3, 2, -2, -2, -2, -2, 2, 2, 2, 2, -2, 3, -3, 6, 0, 0, 6, -6, 0)
+
+[node name="bossBar" type="Node2D" parent="CanvasLayer"]
+process_mode = 1
+visible = false
+position = Vector2(14.5, 150)
+metadata/notes = "-1.5-215.5"
+
+[node name="outline" type="Polygon2D" parent="CanvasLayer/bossBar"]
+process_mode = 1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-1.5, 9.5, -1.5, 0.5, 257.5, 0.5, 257.5, 9.5)
+
+[node name="bar" type="TextureProgressBar" parent="CanvasLayer/bossBar"]
+process_mode = 1
+offset_top = 2.0
+offset_right = 256.0
+offset_bottom = 8.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_8i8l0")
+metadata/_edit_use_anchors_ = true
+
+[node name="name" type="RichTextLabel" parent="CanvasLayer/bossBar"]
+process_mode = 1
+layout_direction = 2
+offset_left = 76.25
+offset_top = -9.25
+offset_right = 7934.25
+offset_bottom = 664.75
+scale = Vector2(0.015, 0.015)
+theme_override_fonts/normal_font = ExtResource("12_2sx5t")
+theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
+text = "[center]Balrog Destroyer of Worlds[/center]"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="pauseScreen" type="Node2D" parent="CanvasLayer"]
+process_mode = 1
+visible = false
+
+[node name="shade" type="Polygon2D" parent="CanvasLayer/pauseScreen"]
+process_mode = 1
+color = Color(0.14, 0.14, 0.14, 0.741176)
+polygon = PackedVector2Array(0, 0, 288, 0, 288, 162, 0, 162)
+
+[node name="gamePaused" type="RichTextLabel" parent="CanvasLayer/pauseScreen"]
+process_mode = 1
+offset_left = 9.25
+offset_top = 40.5
+offset_right = 7709.25
+offset_bottom = 1840.5
+scale = Vector2(0.035, 0.035)
+theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
+text = "[center] Game Paused
+press (esc) to continue[/center]"
+
+[node name="questionBox" type="Polygon2D" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+position = Vector2(92, 52.25)
+scale = Vector2(2.5, 2.5)
+color = Color(0, 0, 0, 0.862745)
+polygon = PackedVector2Array(0.0999985, 0.199999, 0.5, 0, 41.2, 0, 41.6, 0.199999, 41.8, 0.599998, 41.8, 24.4, 41.6, 24.8, 41.2, 25, 0.5, 25, 0.0999985, 24.8, -0.100002, 24.4, -0.100002, 0.599998)
+
+[node name="question" type="RichTextLabel" parent="CanvasLayer/questionBox"]
+offset_top = 1.0
+offset_right = 6967.0
+offset_bottom = 2601.0
+scale = Vector2(0.006, 0.006)
+theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
+text = "[center]Would You like to enter the King's Castle?[/center]"
+scroll_active = false
+
+[node name="yes" type="TextureButton" parent="CanvasLayer/questionBox"]
+offset_left = 8.00001
+offset_top = 14.0
+offset_right = 16.0
+offset_bottom = 20.0
+texture_normal = SubResource("GradientTexture2D_en4wu")
+texture_pressed = SubResource("GradientTexture2D_uj3fw")
+texture_hover = SubResource("GradientTexture2D_kh82y")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/questionBox/yes"]
+layout_mode = 0
+offset_right = 890.0
+offset_bottom = 622.0
+scale = Vector2(0.009, 0.009)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 500
+text = "yes"
+scroll_active = false
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/questionBox/yes"]
+show_behind_parent = true
+polygon = PackedVector2Array(-0.300007, -0.299999, 8.3, -0.299999, 8.3, 6.4, -0.300007, 6.4)
+
+[node name="no" type="TextureButton" parent="CanvasLayer/questionBox"]
+offset_left = 26.0
+offset_top = 14.0
+offset_right = 34.0
+offset_bottom = 20.0
+texture_normal = SubResource("GradientTexture2D_en4wu")
+texture_pressed = SubResource("GradientTexture2D_uj3fw")
+texture_hover = SubResource("GradientTexture2D_kh82y")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/questionBox/no"]
+layout_mode = 0
+offset_right = 890.0
+offset_bottom = 622.0
+scale = Vector2(0.009, 0.009)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 500
+bbcode_enabled = true
+text = "[center]no[/center]"
+scroll_active = false
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/questionBox/no"]
+show_behind_parent = true
+polygon = PackedVector2Array(-0.300007, -0.299999, 8.3, -0.299999, 8.3, 6.4, -0.300007, 6.4)
+
+[node name="iFrameTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 0.3
+one_shot = true
+
+[node name="cursor" type="Polygon2D" parent="."]
+process_mode = 1
+light_mask = 0
+z_index = 10
+scale = Vector2(1.75, 1.75)
+color = Color(0.804688, 0, 1, 1)
+polygon = PackedVector2Array(0, -9, 0.5, -4, 3, -3, 4, -0.5, 9, 0, 4, 0.5, 3.92835, 0.679134, 3, 3, 0.5, 4, 0, 9, -0.5, 4, -0.5, 4, -3, 3, -4, 0.5, -9, 0, -4, -0.5, -3, -3, -2.5, -2, -3, -1, -3, 1, -2.5, 2, -2, 2.5, -1, 3, 1, 3, 2, 2.5, 2.5, 2, 3, 1, 3, -1, 2.5, -2, 2, -2.5, 1, -3, -1, -3, -2, -2.5, -2.5, -2, -3, -3, -0.5, -4)
+
+[connection signal="body_entered" from="components/nomCorpseComp" to="components/nomCorpseComp" method="_on_body_entered"]
+[connection signal="body_exited" from="components/nomCorpseComp" to="components/nomCorpseComp" method="_on_body_exited"]
+[connection signal="body_entered" from="components/seeCorspeComp" to="components/seeCorspeComp" method="_on_body_entered"]
+[connection signal="body_exited" from="components/seeCorspeComp" to="components/seeCorspeComp" method="_on_body_exited"]
+[connection signal="body_entered" from="spirit/head/damage" to="." method="_on_damage_body_entered"]
+[connection signal="pressed" from="CanvasLayer/questionBox/yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="CanvasLayer/questionBox/no" to="." method="_on_no_pressed"]
+[connection signal="timeout" from="iFrameTimer" to="." method="_on_i_frame_timer_timeout"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://djjv5t8ys5q5c"]
+
+[ext_resource type="Texture2D" uid="uid://d3ka7gjmum7mt" path="res://A_Fallen_king_icon.png" id="1_5se4k"]
+[ext_resource type="PackedScene" uid="uid://c7ygbtm2co81t" path="res://scenes+scripts/enemies/knight.tscn" id="2_7xx0k"]
+[ext_resource type="PackedScene" uid="uid://b7wk6iu3uag36" path="res://scenes+scripts/player/player.tscn" id="3_ve5ar"]
+[ext_resource type="PackedScene" uid="uid://cvnb4moh1m5n5" path="res://scenes+scripts/enemies/corpse.tscn" id="4_3apj2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Ground" type="Polygon2D" parent="."]
+color = Color(0.429688, 0.429688, 0.429688, 1)
+polygon = PackedVector2Array(300, -200, 300, 200, -300, 200, -300, -200)
+
+[node name="walls" type="Polygon2D" parent="Ground"]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 800.0
+polygon = PackedVector2Array(300, -200, 300, 200, -300, 200, -300, -200)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 2371.0
+offset_bottom = 1716.0
+texture = ExtResource("1_5se4k")
+stretch_mode = 1
+
+[node name="knight" parent="." instance=ExtResource("2_7xx0k")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-301, 200, 300, 200, 300, -200, -301, -200, -301, 200, -347, -214, 336, -223, 389, 252)
+
+[node name="player" parent="." instance=ExtResource("3_ve5ar")]
+position = Vector2(-150, 167)
+
+[node name="corpse" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(-137, -47)
+
+[node name="corpse2" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(-139, 56)
+
+[node name="corpse3" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(-17, 155)
+
+[node name="corpse4" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(126, 145)
+
+[node name="corpse5" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(158, 74)
+
+[node name="corpse6" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(169, -48)
+
+[node name="corpse7" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(95, -56)
+
+[node name="corpse8" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(58, -136)
+
+[node name="corpse9" parent="." instance=ExtResource("4_3apj2")]
+position = Vector2(-79, -153)

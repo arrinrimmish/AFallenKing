@@ -1,0 +1,2949 @@
+[gd_scene load_steps=23 format=3 uid="uid://c8hxnvb2yiglq"]
+
+[ext_resource type="PackedScene" uid="uid://cvnb4moh1m5n5" path="res://scenes+scripts/enemies/corpse.tscn" id="1_ea5mf"]
+[ext_resource type="Script" uid="uid://cq371qteigfqr" path="res://scenes+scripts/locations/corpse_pile.gd" id="1_yxct7"]
+[ext_resource type="PackedScene" uid="uid://b7wk6iu3uag36" path="res://scenes+scripts/player/player.tscn" id="2_w4uqr"]
+[ext_resource type="PackedScene" uid="uid://yix0kviu5f7m" path="res://scenes+scripts/misc/civilian.tscn" id="3_w4uqr"]
+[ext_resource type="PackedScene" uid="uid://b2imdda243uje" path="res://scenes+scripts/enemies/soldier_enemy.tscn" id="4_2wts6"]
+[ext_resource type="PackedScene" uid="uid://dnx606ev1bp5p" path="res://scenes+scripts/enemies/assasin_enemy.tscn" id="5_2f12h"]
+
+[sub_resource type="Gradient" id="Gradient_6eb1d"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ea5mf"]
+gradient = SubResource("Gradient_6eb1d")
+width = 1100
+height = 1100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.75, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_w4uqr"]
+offsets = PackedFloat32Array(0, 0.0909091, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.431373, 0.431373, 0.431373, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2wts6"]
+gradient = SubResource("Gradient_w4uqr")
+width = 3201
+height = 1296
+fill_from = Vector2(0.0963303, 0.362385)
+fill_to = Vector2(0.348624, 0.0550459)
+
+[sub_resource type="Gradient" id="Gradient_2f12h"]
+colors = PackedColorArray(0.431373, 0.431373, 0.431373, 1, 0.431373, 0.431373, 0.431373, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yxct7"]
+gradient = SubResource("Gradient_2f12h")
+width = 4032
+height = 2048
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_00i6m"]
+gradient = SubResource("Gradient_2f12h")
+width = 4032
+height = 500
+
+[sub_resource type="Gradient" id="Gradient_ea5mf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w4uqr"]
+gradient = SubResource("Gradient_ea5mf")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5mf"]
+size = Vector2(176, 176)
+
+[sub_resource type="Gradient" id="Gradient_2wts6"]
+offsets = PackedFloat32Array(0, 0.201299, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.519481, 0.519481, 0.519481, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2f12h"]
+gradient = SubResource("Gradient_2wts6")
+width = 350
+height = 350
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_yxct7"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6eb1d"]
+gradient = SubResource("Gradient_yxct7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxct7"]
+size = Vector2(113.704, 41.9563)
+
+[sub_resource type="Gradient" id="Gradient_00i6m"]
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0.784314)
+
+[node name="corpsePile" type="Node2D"]
+script = ExtResource("1_yxct7")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0.4375, 0.4375, 0.4375, 1)
+polygon = PackedVector2Array(-500, -500, 500, -500, 1527, -505, 1876, -1229, 2240, -1939, 3008, -2535, 6432, -2620, 6733, -647, 3627, 40, 3117, -105, 2722, 616, 500, 500, -500, 500)
+metadata/_edit_lock_ = true
+
+[node name="corpse" parent="." instance=ExtResource("1_ea5mf")]
+position = Vector2(-83, 7)
+
+[node name="rocks" type="Node2D" parent="."]
+
+[node name="rock" type="Polygon2D" parent="rocks"]
+position = Vector2(-235, 109)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock2" type="Polygon2D" parent="rocks"]
+position = Vector2(-191, 161)
+rotation = -1.26885
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock2"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock3" type="Polygon2D" parent="rocks"]
+position = Vector2(-87, 196)
+rotation = 0.254818
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock3"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock4" type="Polygon2D" parent="rocks"]
+position = Vector2(86, 178)
+rotation = 1.39801
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock4"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock5" type="Polygon2D" parent="rocks"]
+position = Vector2(-233, -72)
+rotation = 0.762709
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock5"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock6" type="Polygon2D" parent="rocks"]
+position = Vector2(-67, 50)
+rotation = 0.762709
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock6"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock12" type="Polygon2D" parent="rocks"]
+position = Vector2(-106, -173)
+rotation = 2.03156
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock12"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock13" type="Polygon2D" parent="rocks"]
+position = Vector2(158, -143)
+rotation = -1.01404
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(4, 1, 7, -3, 3, -3, -2, -5, -4, -1, -3, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock13"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3, 3, 5, 2, 8, -4, 3, -4, -2, -6, -5, -1)
+
+[node name="rock7" type="Polygon2D" parent="rocks"]
+position = Vector2(-59, 108)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(2, 0.999992, 7, -3, 4, -5.00001, -2, -5, -4, -1, -3, 3.99999, 2, 2.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock7"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 4.99999, 3, 3.99999, 3, 0.999992, 8, -3.00001, 5, -6.00001, -2, -6, -5, -1)
+
+[node name="rock8" type="Polygon2D" parent="rocks"]
+position = Vector2(-51, 155)
+rotation = -0.888373
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(2, 0.999992, 7, -3, 4, -5.00001, -2, -5, -4, -1, -3, 3.99999, 2, 2.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock8"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 4.99999, 3, 3.99999, 3, 0.999992, 8, -3.00001, 5, -6.00001, -2, -6, -5, -1)
+
+[node name="rock9" type="Polygon2D" parent="rocks"]
+position = Vector2(-180, -58)
+rotation = -0.380482
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(2, 0.999992, 7, -3, 4, -5.00001, -2, -5, -4, -1, -3, 3.99999, 2, 2.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock9"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 4.99999, 3, 3.99999, 3, 0.999992, 8, -3.00001, 5, -6.00001, -2, -6, -5, -1)
+
+[node name="rock10" type="Polygon2D" parent="rocks"]
+position = Vector2(14, -124)
+rotation = -0.0488692
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(2, 0.999992, 7, -3, 4, -5.00001, -2, -5, -4, -1, -3, 3.99999, 2, 2.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock10"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 4.99999, 3, 3.99999, 3, 0.999992, 8, -3.00001, 5, -6.00001, -2, -6, -5, -1)
+
+[node name="rock11" type="Polygon2D" parent="rocks"]
+position = Vector2(84, -193)
+rotation = 1.02974
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(2, 0.999992, 7, -3, 4, -5.00001, -2, -5, -4, -1, -3, 3.99999, 2, 2.99999)
+
+[node name="Polygon2D" type="Polygon2D" parent="rocks/rock11"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, 4.99999, 3, 3.99999, 3, 0.999992, 8, -3.00001, 5, -6.00001, -2, -6, -5, -1)
+
+[node name="corpses" type="Node2D" parent="."]
+
+[node name="square6" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-46, -22)
+rotation = 1.37532
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square6"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square14" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-47, 41)
+rotation = -0.488692
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square14"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square18" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(23, -24)
+rotation = 1.79594
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square18"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square19" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(3, -52)
+rotation = -2.45568
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square19"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square20" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-43, -55)
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square20"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square21" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-76, -19)
+rotation = 2.80998
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square21"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square23" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(58, -11)
+rotation = -1.28282
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square23"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square24" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(37, -49)
+rotation = 1.50971
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square24"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square25" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-74, -47)
+rotation = 1.309
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square25"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square26" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-82, 41)
+rotation = 1.51844
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square26"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square28" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(72, 19)
+rotation = -2.72271
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square28"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square29" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(73, -41)
+rotation = 2.10138
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square29"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square31" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-15, -79)
+rotation = -0.141372
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square31"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square32" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-29, 74)
+rotation = 2.01586
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square32"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square33" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(55, 65)
+rotation = 0.541052
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square33"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square34" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-119, 24)
+rotation = 2.12756
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square34"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square35" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-105, -4)
+rotation = 0.0331613
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square35"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square36" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-22, -39)
+rotation = -0.0628319
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square36"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square37" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(69, 42)
+rotation = 2.72969
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square37"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square39" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(25, -88)
+rotation = 0.445059
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square39"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square40" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-131, -5)
+rotation = 0.750492
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square40"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square41" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(98, -8)
+rotation = 0.488692
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square41"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square42" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-69, -73)
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square42"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square43" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-58, 71)
+rotation = 2.46964
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square43"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square44" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(10, 73)
+rotation = 2.28464
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square44"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square45" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(101, 25)
+rotation = -0.95295
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square45"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square46" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-112.28, 48.9979)
+rotation = 0.6353
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square46"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square49" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-116.28, 81.9979)
+rotation = 2.7454
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square49"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square53" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-139.28, 82.9979)
+rotation = -2.96531
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square53"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square54" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-117.28, 63.9979)
+rotation = 0.272271
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square54"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square58" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-94.2798, 88.9979)
+rotation = 2.93913
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square58"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square60" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-84.2798, 39.9979)
+rotation = 1.79594
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square60"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square61" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-104.28, 11.9979)
+rotation = -2.45568
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square61"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square65" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-49.2798, 52.9979)
+rotation = -1.28282
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square65"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square66" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-70.2798, 14.9979)
+rotation = 1.50971
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square66"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square70" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-35.2798, 82.9979)
+rotation = -2.72271
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square70"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square71" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-34.2798, 22.9979)
+rotation = 2.10138
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square71"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square75" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-52.2798, 128.998)
+rotation = 0.541052
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square75"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square78" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-129.28, 24.9979)
+rotation = -0.0628319
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square78"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square79" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-38.2798, 105.998)
+rotation = 2.72969
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square79"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square81" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-82.2798, -24.0021)
+rotation = 0.445059
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square81"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square83" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-9.27985, 55.9979)
+rotation = 0.488692
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square83"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square87" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-6.27985, 88.9979)
+rotation = -0.95295
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square87"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square92" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-76.2798, -97.0021)
+rotation = -0.998328
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square92"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square95" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-112.28, -78.0021)
+rotation = -2.96531
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square95"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square96" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-90.2798, -97.0021)
+rotation = 0.272271
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square96"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square97" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-137.28, -80.0021)
+rotation = -1.88496
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square97"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square99" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-93.2798, -53.0021)
+rotation = 0.907571
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square99"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square100" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-67.2798, -72.0021)
+rotation = 2.93913
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square100"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square101" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-50.2798, -93.0021)
+rotation = 0.39968
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square101"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square106" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-39.2798, -69.0021)
+rotation = 0.994838
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square106"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square111" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-61.2798, -47.0021)
+rotation = 1.54462
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square111"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square112" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-8.27983, -78.0021)
+rotation = -2.72271
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square112"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square116" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-109.28, -23.0021)
+rotation = 2.01586
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square116"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square117" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-25.2798, -32.0021)
+rotation = 0.541052
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square117"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square121" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-11.2798, -55.0021)
+rotation = 2.72969
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square121"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square127" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-138.28, -26.0021)
+rotation = 2.46964
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square127"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square128" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-70.2798, -24.0021)
+rotation = 2.28464
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square128"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square129" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(20.7202, -72.0021)
+rotation = -0.95295
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square129"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square131" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(107.72, -62.0021)
+rotation = -3.10843
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square131"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square133" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(126.72, -47.0021)
+rotation = 2.7454
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square133"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square136" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(89.7202, -64.0022)
+rotation = 0.397935
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square136"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square137" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(103.72, -46.0021)
+rotation = -2.96531
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square137"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square140" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(88.7202, -24.0021)
+rotation = -0.488692
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square140"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square147" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(59.7202, -84.0021)
+rotation = 2.80998
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square147"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square152" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(53.7202, -24.0021)
+rotation = 1.51844
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square152"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square158" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(106.72, 8.99786)
+rotation = 2.01586
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square158"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square160" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(16.7202, -41.0021)
+rotation = 2.12756
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square160"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square161" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(30.7202, -69.0021)
+rotation = 0.0331613
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square161"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square164" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(57.7202, 4.99786)
+rotation = -2.02982
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square164"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square166" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(4.72017, -70.0021)
+rotation = 0.750492
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square166"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square169" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(77.7202, 5.99786)
+rotation = 2.46964
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square169"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square171" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(236.72, -40.0021)
+rotation = -0.95295
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square171"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square173" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(63.7202, 97.9979)
+rotation = -3.10843
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square173"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square174" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(45.7202, 72.9979)
+rotation = 1.37532
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square174"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square175" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(82.7202, 112.998)
+rotation = 2.7454
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square175"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square182" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(44.7202, 135.998)
+rotation = -0.488692
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square182"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square186" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(114.72, 70.9979)
+rotation = 1.79594
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square186"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square187" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(94.7202, 42.9979)
+rotation = -2.45568
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square187"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square188" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(48.7202, 39.9979)
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square188"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square189" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(15.7202, 75.9979)
+rotation = 2.80998
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square189"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square192" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(128.72, 45.9979)
+rotation = 1.50971
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square192"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square198" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-21.2798, 60.9979)
+rotation = 3.03513
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square198"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square199" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(76.7202, 15.9979)
+rotation = -0.141372
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square199"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square202" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(-27.2798, 118.998)
+rotation = 2.12756
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square202"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="square204" type="Polygon2D" parent="corpses"]
+z_index = -1
+position = Vector2(69.7202, 55.9979)
+rotation = -0.0628319
+color = Color(0.45, 1, 0.550833, 1)
+polygon = PackedVector2Array(8, 8, 9, 4, 9, -4, 8, -8, 4, -9, 1, -9, 0, -7, 0, -3, -2, 1.90735e-06, -0.855709, -4.28356, -2, -6, -1, -9, -4, -9, -8, -8, -9, -4, -9, 4, -8, 8, -4, 9, 4, 9)
+
+[node name="square" type="Polygon2D" parent="corpses/square204"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="corpse2" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-27, 4)
+rotation = -1.26885
+
+[node name="corpse3" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-18, 57)
+rotation = 2.15897
+
+[node name="corpse5" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(18, -20)
+
+[node name="corpse7" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(1, 37)
+rotation = -1.01927
+
+[node name="corpse8" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-50, -20)
+rotation = 2.66163
+
+[node name="corpse9" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-10, -40)
+rotation = -1.58999
+
+[node name="corpse10" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(18, 0)
+rotation = 1.64759
+
+[node name="corpse11" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(7, 14)
+rotation = 3.04385
+
+[node name="corpse12" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(23, 9)
+rotation = -0.00174533
+
+[node name="corpse13" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(5, -13)
+rotation = -2.66686
+
+[node name="corpse15" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-2, 31)
+rotation = 1.77675
+
+[node name="corpse16" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-21, 33)
+rotation = -2.47488
+
+[node name="corpse17" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-40, -14)
+rotation = 0.254818
+
+[node name="corpse19" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-44, 18)
+rotation = 1.9059
+
+[node name="corpse21" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-16, -26)
+rotation = 1.20777
+
+[node name="corpse24" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-52, 30)
+rotation = 1.27235
+
+[node name="corpse25" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(29, 36)
+rotation = -1.52018
+
+[node name="corpse26" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(62, 28)
+rotation = 2.73144
+
+[node name="corpse28" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(54, -41)
+rotation = -1.01404
+
+[node name="corpse30" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-92, 28)
+rotation = -0.760964
+
+[node name="corpse31" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-92, -37)
+rotation = -1.90415
+
+[node name="corpse32" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(-30, -60)
+rotation = 0.760964
+
+[node name="corpse33" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(59, -58)
+rotation = 2.53771
+
+[node name="corpse34" parent="corpses" instance=ExtResource("1_ea5mf")]
+position = Vector2(31, 67)
+rotation = 0.506145
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 3
+blend_mode = 1
+texture = SubResource("GradientTexture2D_ea5mf")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(2150.5, -127)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_2wts6")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(3443, -1799)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_yxct7")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(5767, -525)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_00i6m")
+
+[node name="torchPillar" type="Polygon2D" parent="."]
+position = Vector2(327, 55)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar2" type="Polygon2D" parent="."]
+position = Vector2(1323, -83)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar2"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar2"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar2"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar2"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar2"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar9" type="Polygon2D" parent="."]
+position = Vector2(1417, 31)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar9"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar9"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar9"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar9"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar9"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar3" type="Polygon2D" parent="."]
+position = Vector2(445, -42)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar3"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar3"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar3"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar3"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar3"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar4" type="Polygon2D" parent="."]
+position = Vector2(635, 44)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar4"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar4"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar4"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar4"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar4"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar5" type="Polygon2D" parent="."]
+position = Vector2(753, -43)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar5"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar5"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar5"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar5"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar5"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar6" type="Polygon2D" parent="."]
+position = Vector2(904, 42)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar6"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar6"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar6"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar6"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar6"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar7" type="Polygon2D" parent="."]
+position = Vector2(1051, -57)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar7"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar7"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar7"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar7"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar7"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar8" type="Polygon2D" parent="."]
+position = Vector2(1190, 41)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar8"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar8"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar8"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar8"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar8"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar10" type="Polygon2D" parent="."]
+position = Vector2(1611, -68)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar10"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar10"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar10"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar10"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar10"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar11" type="Polygon2D" parent="."]
+position = Vector2(1861, -27)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar11"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar11"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar11"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar11"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar11"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar12" type="Polygon2D" parent="."]
+position = Vector2(2169, 102)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar12"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar12"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar12"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar12"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar12"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar13" type="Polygon2D" parent="."]
+position = Vector2(2391, -99)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar13"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar13"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar13"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar13"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar13"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="torchPillar14" type="Polygon2D" parent="."]
+position = Vector2(2437, -283)
+color = Color(0.375, 0.375, 0.375, 1)
+polygon = PackedVector2Array(3, -6, 2, -9, 0, -10, -2, -9, -3, -6, -4, 4, 0, 5, 4, 4)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="torchPillar14"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-5, 5, 0, 6, 5, 5, 4, -7, 3, -9, 2, -10, 0, -11, -2, -10, -3, -9, -4, -7)
+
+[node name="Line2D" type="Line2D" parent="torchPillar14"]
+position = Vector2(0, 1)
+points = PackedVector2Array(-3, -8, -2, -7, 0, -6, 2, -7, 3, -8)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="torchPillar14"]
+color = Color(0.289063, 0.141697, 0, 1)
+polygon = PackedVector2Array(-1, -6, -3, -9, 0, -17, 3, -9, 1, -6)
+
+[node name="crystal" type="Polygon2D" parent="torchPillar14"]
+color = Color(1, 0.492188, 0, 1)
+polygon = PackedVector2Array(-2, -9, 0, -16, 2, -9, 1, -7, -1, -7)
+
+[node name="PointLight2D" type="PointLight2D" parent="torchPillar14"]
+position = Vector2(0, -10)
+color = Color(0.96875, 0.692876, 0.427612, 1)
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_w4uqr")
+
+[node name="walls" type="Polygon2D" parent="."]
+color = Color(0.218964, 0.320313, 0.268054, 1)
+polygon = PackedVector2Array(256, -125, 104, -206, -183, -184, -261, -94, -267, 130, -149, 233, 110, 194, 244, 128, 267, 33, 287, 103, 267, 248, 261, 377, 227, 903, -424, 532, -650, 205, -624, -178, -323, -441, -189, -508, 196, -458, 277, -316, 290, -153, 273, -48)
+
+[node name="Polygon2D" type="Polygon2D" parent="walls"]
+show_behind_parent = true
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(273, -40, 254, -123, 104, -204, -180, -180, -257, -93, -262, 129, -148, 228, 110, 191, 240, 127, 266, 27, 292, 102, 271, 250, 265.386, 370.694, 256, 529, -363, 195, -233, -208, 200, -458, 278.963, -315.471, 295.081, -156.056)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="walls/StaticBody2D"]
+polygon = PackedVector2Array(256, -125, 104, -206, -183, -184, -261, -94, -267, 130, -149, 233, 110, 194, 244, 128, 267, 33, 287, 103, 267, 248, 261, 377, 227, 903, -424, 532, -650, 205, -624, -178, -323, -441, -189, -508, 196, -458, 277, -316, 290, -153, 273, -48)
+
+[node name="path" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(-23, -18)
+color = Color(0.894531, 0.894531, 0.894531, 1)
+polygon = PackedVector2Array(299, -8, 299, 42, 573, 42, 573, -8)
+
+[node name="Polygon2D" type="Polygon2D" parent="path"]
+show_behind_parent = true
+position = Vector2(-36, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(332, -11, 333, 45, 613, 46, 1096, 43, 1430, 17, 1694, 51, 1847, 108, 2021, 112, 2203, 75, 2350, -31, 2455, -182, 2478, -385, 2511, -534, 2650, -670, 2975, -742, 3140, -791, 3294, -858, 3393, -968, 3468, -1101, 3600, -1195, 3772, -1235, 3964, -1227, 4173, -1279, 4434, -1424, 4559, -1627, 4643, -1864, 4667, -2032, 4331, -2093, 4296, -1911, 4249, -1742, 4178, -1592, 4070, -1510, 3927, -1464, 3640, -1464, 3510, -1430, 3356, -1352, 3262, -1258, 3203, -1131, 3085, -1012, 2905, -941, 2740, -877, 2524, -781, 2367, -581, 2344, -392, 2344, -212, 2266, -88, 2158, -14, 2014, 21, 1861, 33, 1716, -11, 1439, -47, 1093, -21, 612, -12)
+
+[node name="Polygon2D2" type="Polygon2D" parent="path"]
+position = Vector2(23, 18)
+color = Color(0.89, 0.89, 0.89, 1)
+polygon = PackedVector2Array(550, 24, 1035, 21, 1373, -5, 1638, 28, 1792, 85, 1962, 88, 2141, 50, 2285, -54, 2389, -200, 2411, -406, 2443, -554, 2579, -693, 2750, -739, 2907, -773, 2851, -947, 2695, -891, 2472, -793, 2319, -596, 2294, -410, 2292, -226, 2215, -103, 2102, -22, 1953, 12, 1801, 24, 1651, -23, 1380, -60, 1036, -34, 550, -26)
+
+[node name="Polygon2D3" type="Polygon2D" parent="path"]
+color = Color(0.89, 0.89, 0.89, 1)
+polygon = PackedVector2Array(2874, -929, 3055, -1001, 3175, -1123, 3235, -1253, 3325, -1345, 3476, -1420, 3605, -1455, 3753, -1454, 3893, -1452, 4040, -1496, 4150, -1583, 4220, -1738, 4270, -1909, 4306, -2092, 4618, -2035, 4592, -1864, 4510, -1635, 4386, -1433, 4135, -1287, 3926, -1241, 3735, -1250, 3555, -1210, 3417, -1111, 3341, -978, 3249, -873, 3099, -802, 2930, -755)
+
+[node name="boundaries" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="boundaries"]
+position = Vector2(392.5, -266)
+polygon = PackedVector2Array(-112.5, 47, 126.5, 36, 525.5, 63, 996.5, 17, 1228.5, 73, 1437.5, 109, 1595.5, 40, 1669.5, -127, 1702.5, -295, 1762.5, -546, 1887.5, -695, 2160.5, -807, 2311.5, -844, 2529.5, -1127, 2756.5, -1511, 3353.5, -1582, 3815.5, -1970, 3950.5, -2672, 1745.5, -952, 1407.5, -407, 1368.5, -122, 870.5, -144, -130.5, -10)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="boundaries"]
+position = Vector2(437.25, 259)
+polygon = PackedVector2Array(-174.25, 15, 116.75, -16, 534.75, -13, 885.75, -57, 1334.75, 34, 1764.75, 3, 2072.75, -116, 2219.75, -433, 2185.75, -672, 2398.75, -785, 2751.75, -828, 3105.75, -914, 3467.75, -1190, 3856.75, -1270, 4217.75, -1348, 4495.75, -1662, 4551.75, -1927, 4653.75, -1849, 4753.75, -1904, 4565.75, -848, 2602.75, -358, 1984.75, 467)
+metadata/_edit_lock_ = true
+
+[node name="enterTownArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="enterTownArea"]
+polygon = PackedVector2Array(2615, -958, 2723, -607, 2846, -494, 3103, -642, 2835, -1031, 2670.93, -976.56)
+
+[node name="trees" type="Node2D" parent="."]
+
+[node name="failedHouse" type="Polygon2D" parent="."]
+color = Color(0.982873, 0.984375, 0.792114, 1)
+polygon = PackedVector2Array(581, -578, 581, -543, 624, -543, 628, -552, 628, -587, 624, -578, 602, -599)
+
+[node name="Line2D" type="Line2D" parent="failedHouse"]
+position = Vector2(-1, 0)
+points = PackedVector2Array(581, -578, 581, -543)
+width = 4.0
+default_color = Color(0.527344, 0.407867, 0, 1)
+
+[node name="Line2D2" type="Line2D" parent="failedHouse"]
+position = Vector2(43, 0)
+points = PackedVector2Array(581, -578, 581, -543)
+width = 4.0
+default_color = Color(0.527344, 0.407867, 0, 1)
+
+[node name="Line2D3" type="Line2D" parent="failedHouse"]
+position = Vector2(48, -9)
+points = PackedVector2Array(581, -578, 581, -543)
+width = 3.0
+default_color = Color(0.527344, 0.407867, 0, 1)
+
+[node name="Line2D9" type="Line2D" parent="failedHouse"]
+position = Vector2(50, -9)
+points = PackedVector2Array(578, -543, 578, -575.5)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D10" type="Line2D" parent="failedHouse"]
+position = Vector2(52, -9)
+points = PackedVector2Array(578, -543, 578, -575.5)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D5" type="Polygon2D" parent="failedHouse"]
+position = Vector2(5, -9)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(601, -601, 599, -601, 574, -575, 569, -565, 602, -598, 623, -566, 625, -565, 628, -575, 603, -601)
+
+[node name="Polygon2D4" type="Polygon2D" parent="failedHouse"]
+color = Color(0.722656, 0.394607, 0.369797, 1)
+polygon = PackedVector2Array(576, -575, 576, -576, 580, -584, 604.894, -609.852, 606, -609, 607.139, -609.818, 632, -584, 629, -575, 624, -577, 602, -599, 580, -577)
+
+[node name="Polygon2D3" type="Polygon2D" parent="failedHouse"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(602, -603, 574, -574, 581, -576, 602, -598, 623, -576, 630, -574)
+
+[node name="Polygon2D" type="Polygon2D" parent="failedHouse"]
+color = Color(0.722656, 0.394607, 0.369797, 1)
+polygon = PackedVector2Array(576, -575, 602, -602, 628, -575, 624, -577, 602, -599, 580, -577)
+
+[node name="Polygon2D6" type="Polygon2D" parent="failedHouse"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(599, -597, 605, -597, 605, -603, 608, -610, 607, -611, 605, -611, 604, -610, 607, -610, 603.965, -603, 601.019, -603, 605, -610, 603.5, -609, 600.168, -603, 599, -603)
+
+[node name="Polygon2D2" type="Polygon2D" parent="failedHouse"]
+position = Vector2(-1, 1)
+color = Color(0.52549, 0.407843, 0, 1)
+polygon = PackedVector2Array(601, -599, 605, -599, 605, -603, 601, -603)
+
+[node name="Line2D5" type="Line2D" parent="failedHouse"]
+points = PackedVector2Array(578, -543, 578, -575.5)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D7" type="Line2D" parent="failedHouse"]
+position = Vector2(48, 0)
+points = PackedVector2Array(574, -543, 578, -543, 578, -575.5)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D6" type="Line2D" parent="failedHouse"]
+position = Vector2(4, 0)
+points = PackedVector2Array(578, -543, 578, -578)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D8" type="Line2D" parent="failedHouse"]
+position = Vector2(44, 0)
+points = PackedVector2Array(534, -543, 578, -543, 578, -578)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D7" type="Polygon2D" parent="failedHouse"]
+color = Color(0.52549, 0.407843, 0, 1)
+polygon = PackedVector2Array(601, -603, 605, -610, 607, -610, 604, -603)
+
+[node name="Polygon2D8" type="Polygon2D" parent="failedHouse"]
+color = Color(0.52549, 0.407843, 0, 1)
+polygon = PackedVector2Array(588, -564, 599, -564, 599, -543, 588, -543)
+
+[node name="shell" type="Polygon2D" parent="."]
+position = Vector2(1704, 192)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell2" type="Polygon2D" parent="."]
+position = Vector2(2128, -226)
+rotation = 2.09298
+color = Color(1, 0.707031, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell2"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell2"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell2"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell3" type="Polygon2D" parent="."]
+position = Vector2(2407, -893)
+rotation = 2.4246
+color = Color(0.707031, 1, 0.993134, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell3"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell3/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell3"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell3"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell3"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell18" type="Polygon2D" parent="."]
+position = Vector2(2557, -440)
+rotation = 5.14052
+color = Color(0.707031, 1, 0.732208, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell18"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell18"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell18/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell18"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell18"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell18"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell4" type="Polygon2D" parent="."]
+position = Vector2(3207, -707)
+rotation = -0.354415
+color = Color(1, 0.707031, 0.981689, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell4"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell4/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell4"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell4"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell4"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell5" type="Polygon2D" parent="."]
+position = Vector2(2948, -1202)
+rotation = 2.45187
+color = Color(0.977112, 1, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell5"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell5/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell5"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell5"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell5"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell6" type="Polygon2D" parent="."]
+position = Vector2(3560, -924)
+rotation = -0.468907
+color = Color(0.707031, 1, 0.993134, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell6"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell6/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell6"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell6"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell6"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell7" type="Polygon2D" parent="."]
+position = Vector2(3175, -1444)
+rotation = 1.91066
+color = Color(1, 0.830627, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell7"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell7/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell7"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell7"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell7"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell8" type="Polygon2D" parent="."]
+position = Vector2(3382, -1600)
+rotation = 2.99474
+color = Color(0.707031, 1, 0.842072, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell8"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell8/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell8"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell8"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell8"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell9" type="Polygon2D" parent="."]
+position = Vector2(3649, -1616)
+rotation = 2.64872
+color = Color(0.949646, 1, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell9"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell9/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell9"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell9"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell9"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell10" type="Polygon2D" parent="."]
+position = Vector2(3803, -1117)
+rotation = 0.0904255
+color = Color(1, 0.707031, 0.919891, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell10"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell10/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell10"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell10"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell10"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell11" type="Polygon2D" parent="."]
+position = Vector2(4149, -1057)
+rotation = -0.00862741
+color = Color(0.707031, 1, 0.88327, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell11"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell11"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell11/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell11"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell11"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell11"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell12" type="Polygon2D" parent="."]
+position = Vector2(4358, -1272)
+rotation = -1.00004
+color = Color(0.935913, 1, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell12"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell12"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell12/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell12"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell12"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell12"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell13" type="Polygon2D" parent="."]
+position = Vector2(3951, -1718)
+rotation = 3.09033
+color = Color(0.729919, 1, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell13"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell13"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell13/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell13"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell13"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell13"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell14" type="Polygon2D" parent="."]
+position = Vector2(4641, -1368)
+rotation = 5.2096
+color = Color(0.746094, 0.746094, 0.746094, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell14"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell14"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell14/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell14"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell14"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell14"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell15" type="Polygon2D" parent="."]
+position = Vector2(4654, -1609)
+rotation = -0.643983
+color = Color(1, 0.707031, 0.707031, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell15"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell15"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell15/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell15"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell15"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell15"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell16" type="Polygon2D" parent="."]
+position = Vector2(4791, -1778)
+rotation = 5.12574
+color = Color(0.707031, 1, 0.821472, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell16"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell16"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell16/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell16"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell16"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell16"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell17" type="Polygon2D" parent="."]
+position = Vector2(4070, -1918)
+rotation = 1.88909
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell17"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell17"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell17/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="PointLight2D" type="PointLight2D" parent="shell17"]
+position = Vector2(-55, -83)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2f12h")
+texture_scale = 1.25
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell17"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell17"]
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="shell23" type="Polygon2D" parent="."]
+position = Vector2(5096, -1714)
+rotation = 2.43273
+scale = Vector2(1.25, 1.25)
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell23"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell23"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell23/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="shell22" type="Polygon2D" parent="."]
+position = Vector2(5094, -1891)
+rotation = 1.92268
+scale = Vector2(1.25, 1.25)
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell22"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell22"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell22/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="shell21" type="Polygon2D" parent="."]
+position = Vector2(4997, -2033)
+rotation = 2.07497
+scale = Vector2(1.25, 1.25)
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell21"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell21"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell21/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="shell20" type="Polygon2D" parent="."]
+position = Vector2(4868, -2273)
+rotation = 1.45708
+scale = Vector2(2, 2)
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="shell20"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell20"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell20/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="shell19" type="Polygon2D" parent="."]
+position = Vector2(4494, -2331)
+rotation = 3.3266
+scale = Vector2(3, 3)
+color = Color(0.70932, 0.707031, 1, 1)
+polygon = PackedVector2Array(80, 80, 0, 70, -80, 80, -70, 0, -80, -80, 0, -70, 80, -80, 70, 0)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="shell19"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(80, 80, -80, 80, -80, -80, 80, -80)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="shell19"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell19/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5mf")
+
+[node name="Polygon2D3" type="Polygon2D" parent="shell19"]
+position = Vector2(54.9619, -0.0337089)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-75, -88, -75, -103, -35, -103, -35, -88)
+
+[node name="Polygon2D2" type="Polygon2D" parent="shell19"]
+position = Vector2(54.9618, -0.0337095)
+color = Color(0.405654, 0.394547, 0.597656, 1)
+polygon = PackedVector2Array(-74, -88, -74, -102, -36, -102, -36, -88)
+
+[node name="PointLight2D" type="PointLight2D" parent="shell19"]
+position = Vector2(-0.318995, -85.0599)
+color = Color(0.996094, 0.404663, 0.986853, 1)
+texture = SubResource("GradientTexture2D_6eb1d")
+
+[node name="civilian" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(1697, 86)
+
+[node name="civilian2" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(1658, 69)
+
+[node name="civilian3" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2297, -246)
+
+[node name="civilian4" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2258, -146)
+
+[node name="civilian5" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2327, -191)
+
+[node name="civilian6" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2356, -567)
+
+[node name="civilian7" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2448, -545)
+
+[node name="civilian8" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2415, -483)
+
+[node name="civilian9" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2552, -848)
+
+[node name="civilian10" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(2495, -810)
+
+[node name="civilian11" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3202, -834)
+
+[node name="civilian12" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3183, -908)
+
+[node name="civilian13" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3120, -881)
+
+[node name="civilian14" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3104, -1138)
+
+[node name="civilian15" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3040, -1134)
+
+[node name="civilian16" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3087, -1023)
+
+[node name="civilian17" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3291, -1356)
+
+[node name="civilian18" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3347, -1432)
+
+[node name="civilian19" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3456, -1451)
+
+[node name="civilian20" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3422, -1352)
+
+[node name="civilian22" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3542, -1098)
+
+[node name="civilian24" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3438, -1075)
+
+[node name="civilian25" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3433, -1007)
+
+[node name="civilian26" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3467, -1122)
+
+[node name="civilian27" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3806, -1291)
+
+[node name="civilian28" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3879, -1250)
+
+[node name="civilian29" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3735, -1259)
+
+[node name="civilian30" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3792, -1360)
+
+[node name="civilian31" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3747, -1521)
+
+[node name="civilian33" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3921, -1574)
+
+[node name="civilian35" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(3858, -1502)
+
+[node name="civilian37" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4186, -1170)
+
+[node name="civilian38" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4207, -1254)
+
+[node name="civilian39" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4255, -1349)
+
+[node name="civilian40" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4137, -1254)
+
+[node name="civilian41" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4511, -1420)
+
+[node name="civilian42" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4546, -1488)
+
+[node name="civilian43" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4559, -1740)
+
+[node name="civilian44" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4634, -1828)
+
+[node name="civilian45" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4682, -1871)
+
+[node name="civilian47" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4630, -1725)
+
+[node name="civilian51" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4319, -1631)
+
+[node name="civilian52" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4292, -1698)
+
+[node name="civilian53" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4208, -1882)
+
+[node name="civilian54" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4235, -1965)
+
+[node name="civilian55" parent="." instance=ExtResource("3_w4uqr")]
+position = Vector2(4259, -1901)
+
+[node name="enemy" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(2689, -656)
+
+[node name="enemy2" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(2630, -842)
+
+[node name="enemy3" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(2767, -756)
+
+[node name="enemy4" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(3278, -970)
+
+[node name="enemy5" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(3207, -1144)
+
+[node name="enemy6" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(3298, -1151)
+
+[node name="enemy7" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(3130, -1111)
+
+[node name="enemy8" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4046, -1425)
+
+[node name="enemy9" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4209, -1396)
+
+[node name="enemy10" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4095, -1629)
+
+[node name="enemy11" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4178, -1512)
+
+[node name="assasinEnemy" parent="." instance=ExtResource("5_2f12h")]
+position = Vector2(4262, -2041)
+
+[node name="assasinEnemy2" parent="." instance=ExtResource("5_2f12h")]
+position = Vector2(4587, -1965)
+
+[node name="player" parent="." instance=ExtResource("2_w4uqr")]
+
+[node name="enterPalace" type="Area2D" parent="."]
+position = Vector2(4451, -2042)
+rotation = 3.3266
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterPalace"]
+position = Vector2(10.7822, 6.79175)
+shape = SubResource("RectangleShape2D_yxct7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="enterPalace"]
+position = Vector2(10.502, 7.19086)
+amount = 200
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(60, 20)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+scale_amount_max = 2.5
+color = Color(1, 0, 0.84375, 1)
+color_initial_ramp = SubResource("Gradient_00i6m")
+
+[node name="enemy12" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4355, -1919)
+
+[node name="enemy13" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4390, -1848)
+
+[node name="enemy14" parent="." instance=ExtResource("4_2wts6")]
+position = Vector2(4456, -1888)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 132.0
+offset_top = -30.0
+offset_right = 4632.0
+offset_bottom = 2995.0
+scale = Vector2(0.02, 0.02)
+theme_override_font_sizes/normal_font_size = 500
+text = "[LMB] to shoot
+[RMB] to heal
+sorry for lack of tutorial"
+
+[connection signal="body_entered" from="enterPalace" to="." method="_on_enter_palace_body_entered"]

@@ -1,0 +1,177 @@
+[gd_scene load_steps=13 format=3 uid="uid://cecku55w5fyk5"]
+
+[ext_resource type="Script" uid="uid://dy5wryibak7ji" path="res://components/hit_box_component.gd" id="1_267tn"]
+[ext_resource type="Script" uid="uid://dp25xrl4cxy3p" path="res://scenes+scripts/enemies/tank.gd" id="1_sgpgh"]
+[ext_resource type="Script" uid="uid://drmqdd5v2r0ab" path="res://components/health_component.gd" id="2_m1plr"]
+[ext_resource type="Script" uid="uid://bs1fpi6rmevxb" path="res://components/knock_back_component.gd" id="3_dkf06"]
+[ext_resource type="Script" uid="uid://b6lm52i8lf8of" path="res://states/state_machine.gd" id="5_sgpgh"]
+[ext_resource type="Script" uid="uid://dwc5cigoae484" path="res://states/enemy_move_state.gd" id="6_vtywj"]
+[ext_resource type="Script" uid="uid://demybg254lvvm" path="res://states/enemy_slash_state.gd" id="7_hv25g"]
+[ext_resource type="Script" uid="uid://bnaedlng2pm5g" path="res://components/sight_component.gd" id="8_r8lvs"]
+[ext_resource type="Script" uid="uid://dxi0ool53mere" path="res://scenes+scripts/enemies/attacks/sword.gd" id="9_sgpgh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jpa8v"]
+radius = 20.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0bf2m"]
+radius = 175.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nc46t"]
+radius = 70.0
+
+[node name="tank" type="CharacterBody2D" node_paths=PackedStringArray("healthComp", "cracks") groups=["enemy"]]
+motion_mode = 1
+script = ExtResource("1_sgpgh")
+healthComp = NodePath("HealthComponent")
+cracks = NodePath("square/cracks")
+
+[node name="HitBoxComponent" type="CharacterBody2D" parent="." node_paths=PackedStringArray("holder", "healthComponent", "knockbackComponent")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_267tn")
+holder = NodePath("..")
+healthComponent = NodePath("../HealthComponent")
+knockbackComponent = NodePath("../KnockBackComponent")
+metadata/_custom_type_script = "uid://dy5wryibak7ji"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_jpa8v")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("2_m1plr")
+holder = NodePath("..")
+maxHealth = 3.0
+notifyHolder = true
+metadata/_custom_type_script = "uid://drmqdd5v2r0ab"
+
+[node name="KnockBackComponent" type="Node" parent="." node_paths=PackedStringArray("holder")]
+script = ExtResource("3_dkf06")
+holder = NodePath("..")
+resistance = 0.5
+metadata/_custom_type_script = "uid://bs1fpi6rmevxb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jpa8v")
+
+[node name="square" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+color = Color(0.764706, 1, 1, 1)
+polygon = PackedVector2Array(8, 8, 9, 8, 9, 2, 7, 2, 7, 1, 8, 1, 8, -1, 7, -1, 7, -2, 9, -2, 9, -8, 8, -8, 8, -9, 2, -9, 2, -7, 1, -7, 1, -8, -1, -8, -1, -7, -2, -7, -2, -9, -8, -9, -8, -8, -9, -8, -9, -2, -7, -2, -7, -1, -8, -1, -8, 1, -7, 1, -7, 2, -9, 2, -9, 8, -8, 8, -8, 9, -2, 9, -2, 7, -1, 7, -1, 8, 1, 8, 1, 7, 2, 7, 2, 9, 8, 9)
+metadata/_edit_group_ = true
+
+[node name="square" type="Polygon2D" parent="square"]
+show_behind_parent = true
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(9, 9, 9, -9, -9, -9, -9, 9)
+
+[node name="cracks" type="Node2D" parent="square"]
+
+[node name="1" type="Polygon2D" parent="square/cracks"]
+visible = false
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-1, 7, -2, 5.5, -1.5, 4, -1, 5.5, 0.5, 8, -1, 8)
+
+[node name="Polygon2D" type="Polygon2D" parent="square/cracks/1"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-6, -9, -6.5, -7.5, -6, -6, -6, -7.5, -5, -9)
+
+[node name="Polygon2D2" type="Polygon2D" parent="square/cracks/1"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-9, -4, -7.5, -4.5, -6, -3.5, -7, -5.5, -9, -5)
+
+[node name="2" type="Polygon2D" parent="square/cracks"]
+visible = false
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(6.5, 0.5, 5, 3, 3, 2, 1, 2.5, 3, 0.5, 4.5, 1.5, 5.5, 0, 7, -1, 8, -1, 8, -0.5)
+
+[node name="Polygon2D" type="Polygon2D" parent="square/cracks/2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-6, 9, -6, 7.5, -7, 6.5, -7, 4.5, -6, 6, -5, 7, -5.5, 9)
+
+[node name="Polygon2D2" type="Polygon2D" parent="square/cracks/2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(3, -9, 4, -7, 2.5, -4.5, 2.5, -2, 3.5, -4, 5.5, -6.5, 5, -9)
+
+[node name="Polygon2D3" type="Polygon2D" parent="square/cracks/2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-7, -1, -6, 0.5, -2.5, 2, -5, 0, -5.5, -1.5, -7, -2)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("baseState")]
+script = ExtResource("5_sgpgh")
+baseState = NodePath("EnemyMoveState")
+metadata/_custom_type_script = "uid://b6lm52i8lf8of"
+
+[node name="EnemyMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("see", "closeSight", "tool", "holder", "character", "attack1")]
+script = ExtResource("6_vtywj")
+see = NodePath("../../SightComponent")
+closeSight = NodePath("../../closeSightComp")
+closeRadius = 75.0
+attackRange = 70.0
+stopRange = 73.0
+tool = NodePath("../../hammer")
+holder = NodePath("../..")
+speed = 800.0
+drag = 750.0
+maxSpeed = 75.0
+character = NodePath("../../square")
+attack1 = NodePath("../EnemySlashState")
+metadata/_custom_type_script = "uid://dwc5cigoae484"
+
+[node name="EnemySlashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("holder", "sight", "nextState", "sword")]
+script = ExtResource("7_hv25g")
+holder = NodePath("../..")
+sight = NodePath("../../SightComponent")
+nextState = NodePath("../EnemyMoveState")
+sword = NodePath("../../hammer")
+slashPath = "res://scenes+scripts/enemies/attacks/bigSlash.tscn"
+metadata/_custom_type_script = "uid://demybg254lvvm"
+
+[node name="SightComponent" type="Area2D" parent="."]
+visible = false
+script = ExtResource("8_r8lvs")
+targetGroup = "player"
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightComponent"]
+shape = SubResource("CircleShape2D_0bf2m")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="closeSightComp" type="Area2D" parent="."]
+visible = false
+script = ExtResource("8_r8lvs")
+targetGroup = "enemy"
+canLeave = true
+storeAll = true
+metadata/_custom_type_script = "uid://bnaedlng2pm5g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closeSightComp"]
+shape = SubResource("CircleShape2D_nc46t")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="hammer" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("9_sgpgh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hammer"]
+rotation = -1.31772
+polygon = PackedVector2Array(32, -2, 47, -1, 61, -2, 60, -6, 62, -8, 67, -8, 69, -6, 68, -2, 70, 8, 65, 11, 59, 8, 61, 2, 47, 3, 29, 2)
+
+[node name="outline" type="Polygon2D" parent="hammer/CollisionPolygon2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(28, 3, 32, -3, 47, -2, 60, -3, 59, -6, 62, -9, 67, -9, 70, -6, 69, -2, 71, 8, 65, 12, 58, 9, 60, 3, 60, 3, 47, 4)
+
+[node name="handle" type="Polygon2D" parent="hammer/CollisionPolygon2D"]
+color = Color(0.695313, 0.598892, 0.309631, 1)
+polygon = PackedVector2Array(32, -2, 35.4739, -1.76841, 35, -1, 36.6378, -1.69081, 47, -1, 60, -2, 60, 2, 49, 3, 48, 2, 47, 3, 29, 2)
+
+[node name="head" type="Polygon2D" parent="hammer/CollisionPolygon2D"]
+color = Color(0.703125, 0.703125, 0.703125, 1)
+polygon = PackedVector2Array(61, -2, 60, -6, 62, -8, 63.9959, -8, 65, -7, 65.1455, -8, 67, -8, 69, -6, 68, -2, 69.118, 3.58982, 68, 5, 69.3473, 4.73634, 70, 8, 65, 11, 63.1267, 10.0634, 63, 9, 62.3565, 9.67823, 59, 8, 59.493, 6.5209, 60, 6, 59.7336, 5.79905, 61, 2)
+
+[connection signal="body_entered" from="SightComponent" to="SightComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="SightComponent" to="SightComponent" method="_on_body_exited"]
+[connection signal="body_entered" from="closeSightComp" to="closeSightComp" method="_on_body_entered"]
+[connection signal="body_exited" from="closeSightComp" to="closeSightComp" method="_on_body_exited"]
+[connection signal="body_entered" from="hammer" to="hammer" method="_on_body_entered"]
